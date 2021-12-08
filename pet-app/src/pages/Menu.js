@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { MenuList } from "../helpers/MenuList";
 import MenuItem from "../components/MenuItem";
 import "../styles/Menu.css";
 
 function Menu() {
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <div className="menu">
       <h1 className="menuTitle">Search Pets</h1>
       <div className="SearchForm">
-        <input type="text" placeholder="enter color" />
+        <input
+          type="text"
+          placeholder="enter color"
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+        />
       </div>
       <div className="menuList">
-        {MenuList.map((menuItem, key) => {
+        {MenuList.filter((menuItem) => {
+          if (searchTerm == "") {
+            return menuItem;
+          } else if (menuItem.color.includes(searchTerm)) {
+            return menuItem;
+          }
+        }).map((menuItem, key) => {
           return (
             // <MenuItem
             //   key={key}
