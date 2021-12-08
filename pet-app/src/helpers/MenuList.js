@@ -1,0 +1,43 @@
+import Pepperoni from "../assets/haribo.jpeg";
+
+export const MenuList = [
+  {
+    type: "dog",
+    name: "Haribo",
+    adopted: true,
+    image: Pepperoni,
+    height: 30,
+    weight: 38,
+    color: "brown",
+    bio: "good doggo",
+    hypoallergenic: false,
+    diet: "needs kisses",
+    breed: "sheltie",
+  },
+  {
+    type: "dog",
+    name: "Haribo",
+    adopted: true,
+    image: Pepperoni,
+    height: 30,
+    weight: 38,
+    color: "brown",
+    bio: "good doggo",
+    hypoallergenic: false,
+    diet: "needs kisses",
+    breed: "sheltie",
+  },
+  {
+    type: "dog",
+    name: "Haribo",
+    adopted: true,
+    image: Pepperoni,
+    height: 30,
+    weight: 38,
+    color: "brown",
+    bio: "good doggo",
+    hypoallergenic: false,
+    diet: "needs kisses",
+    breed: "sheltie",
+  },
+];
