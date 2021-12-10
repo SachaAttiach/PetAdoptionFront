@@ -10,15 +10,33 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import Login from "./Login";
+import Axios from "axios";
 
 function Register() {
-  const { open, setOpen, handleOpen, handleClose, openLogin, handleOpenLogin } =
-    useContext(Context);
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
-  const [registerFirstName, setRegisterFirstName] = useState("");
-  const [registerLastName, setRegisterLastName] = useState("");
+  const {
+    open,
+    setOpen,
+    handleOpen,
+    handleClose,
+    openLogin,
+    handleOpenLogin,
+    registerEmail,
+    setRegisterEmail,
+    registerPassword,
+    setRegisterPassword,
+    registerConfirmPassword,
+    setRegisterConfirmPassword,
+    registerFirstName,
+    setRegisterFirstName,
+    registerLastName,
+    setRegisterLastName,
+    registerNumber,
+    setRegisterNumber,
+    listOfUsers,
+    setListOfUsers,
+    createUser,
+  } = useContext(Context);
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -30,6 +48,14 @@ function Register() {
     boxShadow: 24,
     p: 4,
   };
+  console.log(
+    registerFirstName,
+    registerLastName,
+    registerEmail,
+    registerNumber,
+    registerPassword,
+    registerConfirmPassword
+  );
   return (
     <div>
       <Modal
@@ -51,21 +77,21 @@ function Register() {
                 style={{ backgroundImage: `url(${Harri})` }}
               ></div>
               <div className="rightSide">
-                <h1> Register </h1>
+                <h1 className="registertext"> Register </h1>
                 {/* i could have issues from this being a form - check later */}
-                <form id="contact-form" method="POST">
-                  <label htmlFor="name">First Name</label>
+                <form id="contact-form">
+                  <label htmlFor="firstname">First Name</label>
                   <input
-                    name="fname"
+                    name="firstname"
                     placeholder="Enter first name..."
                     type="text"
                     onChange={(event) => {
                       setRegisterFirstName(event.target.value);
                     }}
                   />
-                  <label htmlFor="name">Last Name</label>
+                  <label htmlFor="lastname">Last Name</label>
                   <input
-                    name="lname"
+                    name="lastname"
                     placeholder="Enter last name..."
                     type="text"
                     onChange={(event) => {
@@ -81,23 +107,34 @@ function Register() {
                       setRegisterEmail(event.target.value);
                     }}
                   />
+                  <label htmlFor="number">Phone Number</label>
+                  <input
+                    name="number"
+                    placeholder="Enter phone number..."
+                    type="number"
+                    onChange={(event) => {
+                      setRegisterNumber(event.target.value);
+                    }}
+                  />
                   <label htmlFor="password">Password</label>
                   <input
+                    name="password"
                     type="password"
                     placeholder="Password..."
                     onChange={(event) => {
                       setRegisterPassword(event.target.value);
                     }}
                   />
-                  <label htmlFor="password">Confirm Password</label>
+                  <label htmlFor="confirmpassword">Confirm Password</label>
                   <input
+                    name="confirmpassword"
                     type="password"
                     placeholder="Password..."
                     onChange={(event) => {
                       setRegisterConfirmPassword(event.target.value);
                     }}
                   />
-                  <button type="submit"> Register </button>
+                  <button onClick={createUser}> Register </button>
                 </form>
                 <div className="loginFeature">
                   <h3>Already have an account?</h3>

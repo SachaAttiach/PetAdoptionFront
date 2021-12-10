@@ -91,5 +91,7 @@ form button {
 }
 
 .loginFeature {
-  margin-left: 5%;
+  position: relative;
+  top: -5%;
+  left: 5%;
 }

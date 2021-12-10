@@ -21,7 +21,7 @@ function Navbar() {
         <div className="hiddenLinks">
           <Link to="/"> Home </Link>
           <Link to="/menu"> Search Pets </Link>
-          <Link to="/about"> About </Link>
+          <Link to="/profile"> Profile </Link>
           <span className="register" onClick={handleOpen}>
             Register/Login
           </span>
@@ -30,7 +30,7 @@ function Navbar() {
       <div className="rightSide">
         <Link to="/"> Home </Link>
         <Link to="/menu"> Search Pets </Link>
-        <Link to="/about"> About </Link>
+        <Link to="/profile"> Profile </Link>
         <span className="register" onClick={handleOpen}>
           Register/Login
         </span>

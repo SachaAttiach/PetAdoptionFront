@@ -16,22 +16,30 @@
 
 .aboutBottom {
   display: flex;
-  flex-direction: column;
-  height: 55%;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  margin-top: 50px;
+  margin: 2%;
+}
+.menuItem {
+  height: auto;
 }
 
-.aboutBottom p {
-  width: 1200px;
+.formpage {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 20%;
+  border: 2px solid black;
+  position: absolute;
+  left: 60%;
+  top: 15%;
 }
 
-.about .aboutBottom h1 {
-  font-weight: 400;
-  font-size: 70px;
-  color: black;
-  height: 30px;
+.profileHeader {
   display: flex;
   justify-content: center;
-  transform: translateY(-40px);
+}
+.userdetails {
+  margin-left: 6%;
 }

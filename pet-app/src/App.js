@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
-import About from "./pages/About";
+import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Context } from "./Context";
@@ -22,8 +22,8 @@ function App() {
             <Route exact path="/menu">
               <Menu />
             </Route>
-            <Route exact path="/about">
-              <About />
+            <Route exact path="/profile">
+              <Profile />
             </Route>
             <Route exact path="/register">
               <Register />
