@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { MenuList } from "../helpers/MenuList";
+import React, { useState, useContext } from "react";
+import { Context } from "../Context";
 import MenuItem from "../components/MenuItem";
 import "../styles/Menu.css";
 
@@ -8,7 +8,7 @@ function Menu() {
   const [searchHeight, setSearchHeight] = useState(0);
   const [searchWeight, setSearchWeight] = useState(0);
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
-
+  const { listOfPets } = useContext(Context);
   const toggleAdvanced = () => {
     setShowAdvancedSearch(!showAdvancedSearch);
   };
@@ -27,11 +27,9 @@ function Menu() {
             // onChange={}
             name="animaltype"
           >
-            <option value="">-- Choose --</option>
+            <option value="">-- Choose Pet Type --</option>
             <option value="dog">Dog</option>
             <option value="cat">Cat</option>
-            <option value="bird">Bird</option>
-            <option value="fish">Fish</option>
           </select>
           <button className="SearchButton" onClick={toggleAdvanced}>
             {showAdvancedSearch ? `Basic Search` : `Advanced Search`}
@@ -92,43 +90,47 @@ function Menu() {
         )}
       </div>
       <div className="menuList">
-        {MenuList.filter((menuItem) => {
-          if (searchColor == "") {
-            return menuItem;
-          } else if (menuItem.color.includes(searchColor)) {
-            return menuItem;
-          }
-        }).map((menuItem, key) => {
-          return (
-            // <MenuItem
-            //   key={key}
-            //   image={menuItem.image}
-            //   name={menuItem.name}
-            //   height={menuItem.height}
-            //   weight={menuItem.weight}
-            //   type={menuItem.type}
-            //   adopted={menuItem.adopted}
-            //   color={menuItem.color}
-            //   bio={menuItem.bio}
-            //   hypoallergenic={menuItem.hypoallergenic}
-            //   diet={menuItem.diet}
-            //   breed={menuItem.breed}
-            // />
-            <div className="menuItem">
-              <div style={{ backgroundImage: `url(${menuItem.image})` }}> </div>
-              <p> {menuItem.name} </p>
-              <p> Height: {menuItem.height}cm </p>
-              <p> Weight: {menuItem.weight}kg </p>
-              <p> Type: {menuItem.type} </p>
-              <p> Adopted: {menuItem.adopted} </p>
-              <p> Color: {menuItem.color} </p>
-              <p> Bio: {menuItem.bio} </p>
-              <p> Hypoallergenic: {menuItem.hypoallergenic} </p>
-              <p> Diet: {menuItem.diet} </p>
-              <p> Breed: {menuItem.breed} </p>
-            </div>
-          );
-        })}
+        {listOfPets
+          .filter((menuItem) => {
+            if (searchColor == "") {
+              return menuItem;
+            } else if (menuItem.color.includes(searchColor)) {
+              return menuItem;
+            }
+          })
+          .map((menuItem, key) => {
+            return (
+              // <MenuItem
+              //   key={key}
+              //   image={menuItem.image}
+              //   name={menuItem.name}
+              //   height={menuItem.height}
+              //   weight={menuItem.weight}
+              //   type={menuItem.type}
+              //   adopted={menuItem.adopted}
+              //   color={menuItem.color}
+              //   bio={menuItem.bio}
+              //   hypoallergenic={menuItem.hypoallergenic}
+              //   diet={menuItem.diet}
+              //   breed={menuItem.breed}
+              // />
+              <div className="menuItem">
+                <div style={{ backgroundImage: `url(${menuItem.picture})` }}>
+                  {" "}
+                </div>
+                <p> Name: {menuItem.name} </p>
+                <p> Height: {menuItem.height}cm </p>
+                <p> Weight: {menuItem.weight}kg </p>
+                <p> Type: {menuItem.type} </p>
+                <p> Adopted: {menuItem.adoptionStatus} </p>
+                <p> Color: {menuItem.color} </p>
+                <p> Bio: {menuItem.bio} </p>
+                <p>Hypoallergenic: {menuItem.hypoallergenic ? `Yes` : `No`}</p>
+                <p> Diet: {menuItem.diet} </p>
+                <p> Breed: {menuItem.breed} </p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

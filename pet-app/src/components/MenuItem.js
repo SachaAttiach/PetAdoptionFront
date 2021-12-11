@@ -19,3 +19,33 @@
 // }
 
 // export default MenuItem;
+
+// app.get("/pet/:petID", async (req, res, next) => {
+//   const { petID } = req.params;
+//   try {
+//     const pets = await getPetLibrary();
+//     const element = pets.forEach((element) => {
+//       if (element.id == petID) {
+//         return res.send({ element });
+//       }
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// async function getData() {
+//   const response = await axios.get(`http://localhost:5500/pet/${id}`);
+//   return response.data.element;
+// }
+//     useEffect(() => {
+//         const fetchData = async () => {
+//            const data =  await getData()
+//             return setData(data)
+//         }
+//          fetchData()
+//     }, [])
+
+//     <Link  to={"/pet/" + Number(data.id)}
+
+//     <Route  exact path="/pet/:petID" element={<PetPage />} />

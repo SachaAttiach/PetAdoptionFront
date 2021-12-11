@@ -22,6 +22,8 @@ function Navbar() {
           <Link to="/"> Home </Link>
           <Link to="/menu"> Search Pets </Link>
           <Link to="/profile"> Profile </Link>
+          <Link to="/usersettings"> User Settings </Link>
+          <Link to="/addpet"> Add Pet </Link>
           <span className="register" onClick={handleOpen}>
             Register/Login
           </span>
@@ -31,6 +33,8 @@ function Navbar() {
         <Link to="/"> Home </Link>
         <Link to="/menu"> Search Pets </Link>
         <Link to="/profile"> Profile </Link>
+        <Link to="/usersettings"> User Settings </Link>
+        <Link to="/addpet"> Add Pet </Link>
         <span className="register" onClick={handleOpen}>
           Register/Login
         </span>

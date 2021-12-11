@@ -48,14 +48,6 @@ function Register() {
     boxShadow: 24,
     p: 4,
   };
-  console.log(
-    registerFirstName,
-    registerLastName,
-    registerEmail,
-    registerNumber,
-    registerPassword,
-    registerConfirmPassword
-  );
   return (
     <div>
       <Modal

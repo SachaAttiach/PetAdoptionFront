@@ -53,6 +53,15 @@
   transition: 0.3s ease-in;
 }
 
+.currentUser {
+  position: absolute;
+  border: 2px solid brown;
+  width: 15%;
+  top: 33%;
+  left: 80%;
+  align-content: center;
+}
+
 @media only screen and (max-width: 650px) {
   .home {
     justify-content: center;
