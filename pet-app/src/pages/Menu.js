@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../Context";
-import MenuItem from "../components/MenuItem";
+
 import "../styles/Menu.css";
 
 function Menu() {
@@ -8,11 +9,11 @@ function Menu() {
   const [searchHeight, setSearchHeight] = useState(0);
   const [searchWeight, setSearchWeight] = useState(0);
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
-  const { listOfPets } = useContext(Context);
+  const { listOfPets, petData } = useContext(Context);
   const toggleAdvanced = () => {
     setShowAdvancedSearch(!showAdvancedSearch);
   };
-
+  // console.log(listOfPets.map((menuItem) => { return menuItem._id}))
   return (
     <div className="menu">
       <h1 className="menuTitle">Search Pets</h1>
@@ -100,34 +101,17 @@ function Menu() {
           })
           .map((menuItem, key) => {
             return (
-              // <MenuItem
-              //   key={key}
-              //   image={menuItem.image}
-              //   name={menuItem.name}
-              //   height={menuItem.height}
-              //   weight={menuItem.weight}
-              //   type={menuItem.type}
-              //   adopted={menuItem.adopted}
-              //   color={menuItem.color}
-              //   bio={menuItem.bio}
-              //   hypoallergenic={menuItem.hypoallergenic}
-              //   diet={menuItem.diet}
-              //   breed={menuItem.breed}
-              // />
               <div className="menuItem">
-                <div style={{ backgroundImage: `url(${menuItem.picture})` }}>
-                  {" "}
-                </div>
-                <p> Name: {menuItem.name} </p>
-                <p> Height: {menuItem.height}cm </p>
-                <p> Weight: {menuItem.weight}kg </p>
-                <p> Type: {menuItem.type} </p>
-                <p> Adopted: {menuItem.adoptionStatus} </p>
-                <p> Color: {menuItem.color} </p>
-                <p> Bio: {menuItem.bio} </p>
-                <p>Hypoallergenic: {menuItem.hypoallergenic ? `Yes` : `No`}</p>
-                <p> Diet: {menuItem.diet} </p>
-                <p> Breed: {menuItem.breed} </p>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to={`/getPets/${menuItem._id}`}
+                >
+                  <div
+                    style={{ backgroundImage: `url(${menuItem.picture})` }}
+                  ></div>
+                  <h2> {menuItem.name} </h2>
+                  <p>Status: {menuItem.adoptionStatus}</p>
+                </Link>
               </div>
             );
           })}

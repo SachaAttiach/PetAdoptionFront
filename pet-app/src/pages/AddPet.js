@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../Context";
-import { Link } from "react-router-dom";
 import "../styles/addpet.css";
 
 function AddPet() {

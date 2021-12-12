@@ -7,7 +7,7 @@ import "../styles/Navbar.css";
 import { Context } from "../Context";
 
 function Navbar() {
-  const { open, setOpen, handleOpen, handleClose } = useContext(Context);
+  const { open, handleOpen } = useContext(Context);
 
   const [openLinks, setOpenLinks] = useState(false);
 

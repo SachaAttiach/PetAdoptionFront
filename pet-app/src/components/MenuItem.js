@@ -1,51 +1,84 @@
-// import React from "react";
+import React from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../Context";
+import { useParams } from "react-router-dom";
+import Axios from "axios";
 
-// function MenuItem(props) {
-//   return (
-//     // <div className="menuItem">
-//     //   <div style={{ backgroundImage: `url(${props.image})` }}> </div>
-//     //   <p> {props.name} </p>
-//     //   <p> Height: {props.height}cm </p>
-//     //   <p> Weight: {props.weight}kg </p>
-//     //   <p> Type: {props.type} </p>
-//     //   <p> Adopted: {props.adopted} </p>
-//     //   <p> Color: {props.color} </p>
-//     //   <p> Bio: {props.bio} </p>
-//     //   <p> Hypoallergenic: {props.hypoallergenic} </p>
-//     //   <p> Diet: {props.diet} </p>
-//     //   <p> Breed: {props.breed} </p>
-//     // </div>
-//   );
-// }
+function MenuItem() {
+  const { petData, setPetData, listOfPets } = useContext(Context);
+  const { petID } = useParams();
 
-// export default MenuItem;
+  useEffect(() => {
+    Axios.get(`http://localhost:5000/getPets/${petID}`).then((response) => {
+      setPetData(response.data.element);
+    });
+  }, []);
 
-// app.get("/pet/:petID", async (req, res, next) => {
-//   const { petID } = req.params;
-//   try {
-//     const pets = await getPetLibrary();
-//     const element = pets.forEach((element) => {
-//       if (element.id == petID) {
-//         return res.send({ element });
-//       }
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+  useEffect(() => {
+    console.log(petData);
+  });
 
-// async function getData() {
-//   const response = await axios.get(`http://localhost:5500/pet/${id}`);
-//   return response.data.element;
-// }
-//     useEffect(() => {
-//         const fetchData = async () => {
-//            const data =  await getData()
-//             return setData(data)
-//         }
-//          fetchData()
-//     }, [])
+  return (
+    // <div className="menuItemPage">
+    //   <div className="menuItemProfile">
+    //     <h1>Pet Profile</h1>
+    //     <div
+    //       className="menuItemImage"
+    //       style={{ backgroundImage: `url(${petData.picture})` }}
+    //     ></div>
+    //     <p> Name: {petData.name} </p>
+    //     <p> Height: {petData.height}cm </p>
+    //     <p> Weight: {petData.weight}kg </p>
+    //     <p> Type: {petData.type} </p>
+    //     <p> Adopted: {petData.adoptionStatus} </p>
+    //     <p> Color: {petData.color} </p>
+    //     <p> Bio: {petData.bio} </p>
+    //     <p>Hypoallergenic: {petData.hypoallergenic ? `Yes` : `No`}</p>
+    //     <p> Diet: {petData.diet} </p>
+    //     <p> Breed: {petData.breed} </p>
+    //   </div>
+    // </div>
+    <div class="parent">
+      <div class="box-one">
+        <h1>{petData.name}</h1>
+        <h1>
+          Type: <span className="color-secondary">{petData.type}</span>
+          <br />
+          Height:
+          <span className="color-secondary">{petData.height}cm </span>
+          <br />
+          Weight: <span className="color-secondary">{petData.weight}kg</span>
+          <br />
+          Color: <span className="color-secondary">{petData.color}</span>
+          <br />
+          Bio: <span className="color-secondary">{petData.bio}</span>
+          <br />
+          Hypoallergenic:{" "}
+          <span className="color-secondary">
+            {petData.hypoallergenic ? `Yes` : `No`}
+          </span>
+          <br />
+          Diet: <span className="color-secondary">{petData.diet}</span>
+          <br />
+          Breed: <span className="color-secondary">{petData.breed}</span>
+        </h1>
+        <div style={{ marginTop: "50px" }}>
+          <a
+            className="contact-link"
+            target="_blank"
+            // href="https://www.instagram.com/akhtar_sheraliat/"
+          >
+            Adopt Me
+          </a>
+        </div>
+      </div>
+      <div className="box-two">
+        <div className="image">
+          <img src={petData.picture} />
+        </div>
+      </div>
+    </div>
+  );
+}
 
-//     <Link  to={"/pet/" + Number(data.id)}
-
-//     <Route  exact path="/pet/:petID" element={<PetPage />} />
+export default MenuItem;

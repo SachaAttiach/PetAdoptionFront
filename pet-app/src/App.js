@@ -7,8 +7,8 @@ import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import UserSettings from "./pages/UserSettings";
 import AddPet from "./pages/AddPet";
+import MenuItem from "./components/MenuItem";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Context } from "./Context";
 import ContextProvider from "./Context";
 
 function App() {
@@ -32,6 +32,9 @@ function App() {
             </Route>
             <Route exact path="/addpet">
               <AddPet />
+            </Route>
+            <Route exact path="/getPets/:petID">
+              <MenuItem />
             </Route>
             <Route exact path="/register">
               <Register />

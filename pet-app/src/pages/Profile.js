@@ -1,25 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Context";
-import Labrador from "../assets/humanDog.jpeg";
 import "../styles/Profile.css";
-import Axios from "axios";
+
 
 function Profile() {
   const {
-    registerEmail,
-    setRegisterEmail,
-    registerPassword,
-    setRegisterPassword,
-    registerConfirmPassword,
-    setRegisterConfirmPassword,
-    registerFirstName,
-    setRegisterFirstName,
-    registerLastName,
-    setRegisterLastName,
-    registerNumber,
-    setRegisterNumber,
     listOfUsers,
-    setListOfUsers,
   } = useContext(Context);
 
   return (

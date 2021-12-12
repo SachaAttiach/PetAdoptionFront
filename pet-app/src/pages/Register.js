@@ -1,39 +1,26 @@
 import Harri from "../assets/harri.jpeg";
 import "../styles/Register.css";
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Context";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
 import Login from "./Login";
-import Axios from "axios";
+
 
 function Register() {
   const {
     open,
-    setOpen,
-    handleOpen,
     handleClose,
     openLogin,
     handleOpenLogin,
-    registerEmail,
     setRegisterEmail,
-    registerPassword,
     setRegisterPassword,
-    registerConfirmPassword,
     setRegisterConfirmPassword,
-    registerFirstName,
     setRegisterFirstName,
-    registerLastName,
     setRegisterLastName,
-    registerNumber,
     setRegisterNumber,
-    listOfUsers,
-    setListOfUsers,
     createUser,
   } = useContext(Context);
 

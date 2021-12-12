@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../Context";
 import Cat from "../assets/bettercat.jpeg";
-import { Link } from "react-router-dom";
-import BannerImage from "../assets/doggo.jpeg";
 import "../styles/Home.css";
 
 function UserSettings() {

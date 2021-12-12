@@ -35,6 +35,7 @@ export default function ContextProvider({ children }) {
     dietery: "",
     breed: "",
   });
+  const [petData, setPetData] = useState({});
 
   // const [user, setUser] = useState({});
   // const [authenticated, setAuthenticated] = useState(null);
@@ -146,6 +147,8 @@ export default function ContextProvider({ children }) {
         createPet,
         setPetFormData,
         petFormData,
+        petData,
+        setPetData,
       }}
     >
       {children}
