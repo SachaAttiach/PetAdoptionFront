@@ -170,7 +170,7 @@
 .menuItem p {
   margin-left: 20px;
 }
-.menuItemPage {
+/* .menuItemPage {
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -194,11 +194,11 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .parent {
   background-color: #252e3b;
-  height: 600px;
+  height: 650px;
   display: flex;
 }
 h1 {

@@ -19,25 +19,6 @@ function MenuItem() {
   });
 
   return (
-    // <div className="menuItemPage">
-    //   <div className="menuItemProfile">
-    //     <h1>Pet Profile</h1>
-    //     <div
-    //       className="menuItemImage"
-    //       style={{ backgroundImage: `url(${petData.picture})` }}
-    //     ></div>
-    //     <p> Name: {petData.name} </p>
-    //     <p> Height: {petData.height}cm </p>
-    //     <p> Weight: {petData.weight}kg </p>
-    //     <p> Type: {petData.type} </p>
-    //     <p> Adopted: {petData.adoptionStatus} </p>
-    //     <p> Color: {petData.color} </p>
-    //     <p> Bio: {petData.bio} </p>
-    //     <p>Hypoallergenic: {petData.hypoallergenic ? `Yes` : `No`}</p>
-    //     <p> Diet: {petData.diet} </p>
-    //     <p> Breed: {petData.breed} </p>
-    //   </div>
-    // </div>
     <div class="parent">
       <div class="box-one">
         <h1>{petData.name}</h1>

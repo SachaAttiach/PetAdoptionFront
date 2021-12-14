@@ -7,7 +7,18 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Login from "./Login";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
+const schema = yup.object().shape({
+  firstname: yup.string().required(),
+  lastname: yup.string().required(),
+  email: yup.string().email().required(),
+  number: yup.number().positive().integer().required(),
+  password: yup.string().required(),
+  confirmpassword: yup.string().oneOf([yup.ref("password"), null]),
+});
 
 function Register() {
   const {
@@ -21,6 +32,8 @@ function Register() {
     setRegisterFirstName,
     setRegisterLastName,
     setRegisterNumber,
+    registerPassword,
+    registerConfirmPassword,
     createUser,
   } = useContext(Context);
 
@@ -35,6 +48,15 @@ function Register() {
     boxShadow: 24,
     p: 4,
   };
+
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const submitForm = (data) => {
+    console.log(data);
+  };
+
   return (
     <div>
       <Modal
@@ -58,62 +80,77 @@ function Register() {
               <div className="rightSide">
                 <h1 className="registertext"> Register </h1>
                 {/* i could have issues from this being a form - check later */}
-                <form id="contact-form">
+                <form onSubmit={handleSubmit(submitForm)} id="contact-form">
                   <label htmlFor="firstname">First Name</label>
                   <input
                     name="firstname"
                     placeholder="Enter first name..."
                     type="text"
+                    ref={register}
                     onChange={(event) => {
                       setRegisterFirstName(event.target.value);
                     }}
                   />
-                  <label htmlFor="lastname">Last Name</label>
+                  {/* <p>{errors.firstname?.message}</p> */}
+                  <label className="lastnamelabel" htmlFor="lastname">
+                    Last Name
+                  </label>
                   <input
                     name="lastname"
                     placeholder="Enter last name..."
                     type="text"
+                    ref={register}
                     onChange={(event) => {
                       setRegisterLastName(event.target.value);
                     }}
                   />
+                  <p>{errors.lastname?.message}</p>
+
                   <label htmlFor="email">Email</label>
                   <input
                     name="email"
                     placeholder="Enter email..."
                     type="email"
+                    ref={register}
                     onChange={(event) => {
                       setRegisterEmail(event.target.value);
                     }}
                   />
+                  <p>{errors.email?.message}</p>
                   <label htmlFor="number">Phone Number</label>
                   <input
                     name="number"
                     placeholder="Enter phone number..."
                     type="number"
+                    ref={register}
                     onChange={(event) => {
                       setRegisterNumber(event.target.value);
                     }}
                   />
+                  <p>{errors.number?.message}</p>
                   <label htmlFor="password">Password</label>
                   <input
                     name="password"
                     type="password"
                     placeholder="Password..."
+                    ref={register}
                     onChange={(event) => {
                       setRegisterPassword(event.target.value);
                     }}
                   />
+                  <p>{errors.password?.message}</p>
                   <label htmlFor="confirmpassword">Confirm Password</label>
                   <input
                     name="confirmpassword"
                     type="password"
                     placeholder="Password..."
+                    ref={register}
                     onChange={(event) => {
                       setRegisterConfirmPassword(event.target.value);
                     }}
                   />
-                  <button onClick={createUser}> Register </button>
+                  <p>{errors.confirmpassword && "Passwords don't match!"}</p>
+                  <button onClick={createUser}>Register</button>
                 </form>
                 <div className="loginFeature">
                   <h3>Already have an account?</h3>

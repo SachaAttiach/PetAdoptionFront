@@ -64,12 +64,14 @@ textarea:focus {
 }
 
 form label {
-  margin-top: 15px;
   color: grey;
+}
+.lastnamelabel {
+  margin-top: 20px;
 }
 
 form button {
-  margin-top: 40px;
+  margin-top: px;
   width: 140px;
   height: 40px;
   border: none;

@@ -45,12 +45,14 @@ export default function ContextProvider({ children }) {
   //   setAuthenticated(currentUser ? true : false);
   // });
 
+  // Receiving list of Users
   useEffect(() => {
     Axios.get("http://localhost:5000/getUsers").then((response) => {
       setListOfUsers(response.data);
     });
   }, []);
 
+  //Receiving list of Pets
   useEffect(() => {
     Axios.get("http://localhost:5000/getPets").then((response) => {
       setListOfPets(response.data);
@@ -59,7 +61,7 @@ export default function ContextProvider({ children }) {
 
   const createUser = () => {
     console.log("i've been clicked");
-    Axios.post("http://localhost:5000/createUser", {
+    Axios.post("http://localhost:5000/api/user/register", {
       firstname: registerFirstName,
       lastname: registerLastName,
       email: registerEmail,
@@ -82,7 +84,6 @@ export default function ContextProvider({ children }) {
   };
 
   const createPet = () => {
-    console.log("i've been clicked");
     Axios.post("http://localhost:5000/createPets", {
       type: petFormData.type,
       name: petFormData.name,
