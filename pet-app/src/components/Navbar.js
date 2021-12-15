@@ -7,7 +7,7 @@ import "../styles/Navbar.css";
 import { Context } from "../Context";
 
 function Navbar() {
-  const { open, handleOpen } = useContext(Context);
+  const { open, handleOpen, currentUser, logout } = useContext(Context);
 
   const [openLinks, setOpenLinks] = useState(false);
 
@@ -18,6 +18,12 @@ function Navbar() {
     <div className="navbar">
       <div className="leftSide" id={openLinks ? "open" : "close"}>
         <img src={Logo} />
+        <span className="register">
+          {currentUser ? `Hello ${currentUser}` : `Nobody is logged in `}
+        </span>
+        <span className="register" onClick={logout}>
+          Logout
+        </span>
         <div className="hiddenLinks">
           <Link to="/"> Home </Link>
           <Link to="/menu"> Search Pets </Link>

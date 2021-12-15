@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import Axios from "axios";
+import axios from "axios";
 
 export const Context = createContext({});
 
@@ -11,6 +12,7 @@ export default function ContextProvider({ children }) {
   const [openLogin, setOpenLogin] = useState(false);
   const handleOpenLogin = () => setOpenLogin(true);
   const handleCloseLogin = () => setOpenLogin(false);
+
   //States for User registration
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
@@ -20,6 +22,7 @@ export default function ContextProvider({ children }) {
   const [registerNumber, setRegisterNumber] = useState(0);
   const [listOfUsers, setListOfUsers] = useState([]);
   const [userBio, setUserBio] = useState("");
+
   //States for adding receiving/adding pet from database
   const [listOfPets, setListOfPets] = useState([]);
   const [petFormData, setPetFormData] = useState({
@@ -36,6 +39,14 @@ export default function ContextProvider({ children }) {
     breed: "",
   });
   const [petData, setPetData] = useState({});
+  const [loginStatus, setLoginStatus] = useState("");
+
+  //login states
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  //to redirect register to login page:
+  const [redirect, setRedirect] = useState(false);
 
   // const [user, setUser] = useState({});
   // const [authenticated, setAuthenticated] = useState(null);
@@ -58,7 +69,7 @@ export default function ContextProvider({ children }) {
       setListOfPets(response.data);
     });
   }, []);
-
+  // creating user
   const createUser = () => {
     console.log("i've been clicked");
     Axios.post("http://localhost:5000/api/user/register", {
@@ -81,9 +92,12 @@ export default function ContextProvider({ children }) {
         },
       ]);
     });
+    setRedirect(true);
   };
 
+  //creating pets
   const createPet = () => {
+    console.log("i've been clicked");
     Axios.post("http://localhost:5000/createPets", {
       type: petFormData.type,
       name: petFormData.name,
@@ -113,6 +127,45 @@ export default function ContextProvider({ children }) {
           breed: petFormData.breed,
         },
       ]);
+    });
+  };
+
+  //login user
+  async function loginUser(event) {
+    event.preventDefault();
+    await fetch("http://localhost:5000/api/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        email: loginEmail,
+        password: loginPassword,
+      }),
+    });
+    setRedirect(true);
+  }
+
+  //get current user
+  const [currentUser, setCurrentUser] = useState("");
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("http://localhost:5000/api/user/users", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const content = await response.json();
+      setCurrentUser(content.firstname);
+    })();
+  });
+
+  //logout user:
+
+  const logout = async () => {
+    await fetch("http://localhost:5000/api/user/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
     });
   };
 
@@ -150,6 +203,16 @@ export default function ContextProvider({ children }) {
         petFormData,
         petData,
         setPetData,
+        loginEmail,
+        loginPassword,
+        setLoginEmail,
+        setLoginPassword,
+        loginUser,
+        redirect,
+        setRedirect,
+        currentUser,
+        setCurrentUser,
+        logout,
       }}
     >
       {children}

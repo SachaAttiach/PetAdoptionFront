@@ -43,15 +43,12 @@ function MenuItem() {
           <br />
           Breed: <span className="color-secondary">{petData.breed}</span>
         </h1>
-        <div style={{ marginTop: "50px" }}>
-          <a
-            className="contact-link"
-            target="_blank"
-            // href="https://www.instagram.com/akhtar_sheraliat/"
-          >
-            Adopt Me
-          </a>
-        </div>
+        <button className="contact-link" style={{ marginTop: "50px" }}>
+          Adopt Me
+        </button>
+        <button className="contact-link" style={{ marginTop: "50px" }}>
+          Save For Later
+        </button>
       </div>
       <div className="box-two">
         <div className="image">

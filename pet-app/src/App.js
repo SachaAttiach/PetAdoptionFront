@@ -10,6 +10,7 @@ import AddPet from "./pages/AddPet";
 import MenuItem from "./components/MenuItem";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ContextProvider from "./Context";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route exact path="/getPets/:petID">
               <MenuItem />
+            </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
             </Route>
             <Route exact path="/register">
               <Register />

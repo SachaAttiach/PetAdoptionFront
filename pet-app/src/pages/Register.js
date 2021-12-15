@@ -1,6 +1,6 @@
 import Harri from "../assets/harri.jpeg";
 import "../styles/Register.css";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../Context";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -10,6 +10,7 @@ import Login from "./Login";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Redirect } from "react-router-dom";
 
 const schema = yup.object().shape({
   firstname: yup.string().required(),
@@ -35,6 +36,8 @@ function Register() {
     registerPassword,
     registerConfirmPassword,
     createUser,
+    redirect,
+    setRedirect,
   } = useContext(Context);
 
   const style = {
@@ -57,6 +60,7 @@ function Register() {
     console.log(data);
   };
 
+  redirect && <Login />;
   return (
     <div>
       <Modal

@@ -6,14 +6,22 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
+import { Redirect } from "react-router-dom";
 
 function Login() {
-  const { openLogin, handleCloseLogin } =
-    useContext(Context);
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  console.log(loginEmail, loginPassword);
+  const {
+    openLogin,
+    handleCloseLogin,
+    loginEmail,
+    loginPassword,
+    setLoginEmail,
+    setLoginPassword,
+    loginUser,
+    redirect,
+    setRedirect,
+  } = useContext(Context);
 
+  console.log(loginEmail, loginPassword);
   const style = {
     position: "absolute",
     top: "50%",
@@ -25,6 +33,10 @@ function Login() {
     boxShadow: 24,
     p: 4,
   };
+
+  if (redirect) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <div>
       <Modal
@@ -47,8 +59,7 @@ function Login() {
               ></div>
               <div className="rightSide">
                 <h1> Login </h1>
-                {/* i could have issues from this being a form - check later */}
-                <form id="contact-form" method="POST">
+                <form id="contact-form">
                   <label htmlFor="email">Email</label>
                   <input
                     name="email"
@@ -67,7 +78,9 @@ function Login() {
                     }}
                   />
 
-                  <button type="submit"> Login </button>
+                  <button type="submit" onClick={loginUser}>
+                    Login
+                  </button>
                 </form>
               </div>
             </div>
