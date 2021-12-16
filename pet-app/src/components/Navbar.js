@@ -21,14 +21,17 @@ function Navbar() {
         <span className="register">
           {currentUser ? `Hello ${currentUser}` : `Nobody is logged in `}
         </span>
-        <span className="register" onClick={logout}>
-          Logout
-        </span>
+        {currentUser && (
+          <Link to="/">
+            <span className="register" onClick={logout}>
+              Logout
+            </span>
+          </Link>
+        )}
         <div className="hiddenLinks">
           <Link to="/"> Home </Link>
           <Link to="/menu"> Search Pets </Link>
           <Link to="/profile"> Profile </Link>
-          <Link to="/usersettings"> User Settings </Link>
           <Link to="/addpet"> Add Pet </Link>
           <span className="register" onClick={handleOpen}>
             Register/Login
@@ -39,7 +42,6 @@ function Navbar() {
         <Link to="/"> Home </Link>
         <Link to="/menu"> Search Pets </Link>
         <Link to="/profile"> Profile </Link>
-        <Link to="/usersettings"> User Settings </Link>
         <Link to="/addpet"> Add Pet </Link>
         <span className="register" onClick={handleOpen}>
           Register/Login

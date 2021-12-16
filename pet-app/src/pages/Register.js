@@ -162,6 +162,7 @@ function Register() {
                     Login
                   </button>
                 </div>
+
                 {openLogin && <Login />}
               </div>
             </div>

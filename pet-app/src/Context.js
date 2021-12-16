@@ -47,14 +47,7 @@ export default function ContextProvider({ children }) {
 
   //to redirect register to login page:
   const [redirect, setRedirect] = useState(false);
-
-  // const [user, setUser] = useState({});
-  // const [authenticated, setAuthenticated] = useState(null);
-
-  // onAuthStateChanged(auth, (currentUser) => {
-  //   setUser(currentUser);
-  //   setAuthenticated(currentUser ? true : false);
-  // });
+  const [authenticated, setAuthenticated] = useState(false);
 
   // Receiving list of Users
   useEffect(() => {
@@ -143,6 +136,8 @@ export default function ContextProvider({ children }) {
       }),
     });
     setRedirect(true);
+    setAuthenticated(true);
+    handleClose();
   }
 
   //get current user
@@ -167,6 +162,8 @@ export default function ContextProvider({ children }) {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
+    setAuthenticated(false);
+    window.location.reload();
   };
 
   return (
@@ -213,6 +210,7 @@ export default function ContextProvider({ children }) {
         currentUser,
         setCurrentUser,
         logout,
+        authenticated,
       }}
     >
       {children}

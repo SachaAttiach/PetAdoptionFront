@@ -35,7 +35,7 @@ function Login() {
   };
 
   if (redirect) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/" />;
   }
   return (
     <div>
