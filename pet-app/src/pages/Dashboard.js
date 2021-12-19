@@ -7,40 +7,34 @@ import { Context } from "../Context";
 import "../styles/dashboard.css";
 
 const Dashboard = () => {
-  const { currentUser } = useContext(Context);
+  const { logout } = useContext(Context);
 
   return (
-    <div className="sidebar-container">
-      <div className="sidebar_responsive" id="sidebar">
-        <div className="sidebar__menu">
-          <div className="sidebar__link active_menu_link">
-            <i className="fa fa-home"></i>
-            <a href="#">Dashboard</a>
-          </div>
-          <h2>PETS</h2>
-          <div className="sidebar__link">
-            <i className="fa fa-user-secret" aria-hidden="true"></i>
-            <a href="#">Add Pet</a>
-          </div>
-          <div className="sidebar__link">
-            <i className="fa fa-building-o"></i>
-            <a href="#">Company Management</a>
-          </div>
+    <div className="sidebar_responsive">
+      <div className="sidebar__menu">
+        <div className="sidebar__link active_menu_link">
+          <i className="fa fa-home"></i>
+          <Link to="/admin"> Dashboard </Link>
+        </div>
+        <h2>PETS</h2>
+        <div className="sidebar__link">
+          <i className="fa fa-user-secret" aria-hidden="true"></i>
+          <Link to="/addpet"> Add Pet </Link>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-building-o"></i>
+          <Link to="/allPets"> All Pets </Link>
+        </div>
 
-          <h2>USERS</h2>
-          <div className="sidebar__link">
-            <i className="fa fa-question"></i>
-            <a href="#">All Users</a>
-          </div>
-          <div className="sidebar__link">
-            <i className="fa fa-sign-out"></i>
-            <a href="#">Leave Policy</a>
-          </div>
+        <h2>USERS</h2>
+        <div className="sidebar__link">
+          <i className="fa fa-question"></i>
+          <Link to="/profiles"> All Users </Link>
+        </div>
 
-          <div className="sidebar__logout">
-            <i className="fa fa-power-off"></i>
-            <a href="#">Log out</a>
-          </div>
+        <div className="sidebar__logout">
+          <i className="fa fa-power-off"></i>
+          <a onClick={logout}>Log out</a>
         </div>
       </div>
     </div>

@@ -85,11 +85,11 @@ form button {
   width: 140px;
   height: 40px;
   border: none;
-  background-color: #5c34c0;
+  background-color: black;
   color: whitesmoke;
   font-size: 15px;
   cursor: pointer;
-  margin-left: 5%;
+  margin-left: 3.5%;
 }
 
 .loginFeature {

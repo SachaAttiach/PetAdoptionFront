@@ -23,9 +23,33 @@ export default function ContextProvider({ children }) {
   const [listOfUsers, setListOfUsers] = useState([]);
   const [userBio, setUserBio] = useState("");
 
+  //states for Updating User:
+  const [updateEmail, setUpdateEmail] = useState("");
+  const [updatePassword, setUpdatePassword] = useState("");
+  const [updateConfirmPassword, setUpdateConfirmPassword] = useState("");
+  const [updateFirstName, setUpdateFirstName] = useState("");
+  const [updateLastName, setUpdateLastName] = useState("");
+  const [updateNumber, setUpdateNumber] = useState(0);
+  const [updateUserBio, setUpdateUserBio] = useState("");
+
   //States for adding receiving/adding pet from database
   const [listOfPets, setListOfPets] = useState([]);
   const [petFormData, setPetFormData] = useState({
+    type: "",
+    name: "",
+    adoptionStatus: true,
+    picture: "",
+    height: 0,
+    weight: 0,
+    color: "",
+    bio: "",
+    hypoallergenic: true,
+    dietery: "",
+    breed: "",
+  });
+
+  //state for editing the pets
+  const [EditPetFormData, setEditPetFormData] = useState({
     type: "",
     name: "",
     adoptionStatus: "",
@@ -38,9 +62,13 @@ export default function ContextProvider({ children }) {
     dietery: "",
     breed: "",
   });
+
+  // States to receive individual pet data
   const [petData, setPetData] = useState({});
   const [loginStatus, setLoginStatus] = useState("");
 
+  // States to receive individual pet data
+  const [userData, setUserData] = useState({});
   //login states
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -62,14 +90,17 @@ export default function ContextProvider({ children }) {
       setListOfPets(response.data);
     });
   }, []);
+
+
+
   // creating user
   const createUser = () => {
-    console.log("i've been clicked");
     Axios.post("http://localhost:5000/api/user/register", {
       firstname: registerFirstName,
       lastname: registerLastName,
       email: registerEmail,
       number: registerNumber,
+      // bio: userBio,
       password: registerPassword,
       confirmpassword: registerConfirmPassword,
     }).then((response) => {
@@ -80,6 +111,7 @@ export default function ContextProvider({ children }) {
           lastname: registerLastName,
           email: registerEmail,
           number: registerNumber,
+          // bio: userBio,
           password: registerPassword,
           confirmpassword: registerConfirmPassword,
         },
@@ -88,9 +120,22 @@ export default function ContextProvider({ children }) {
     setRedirect(true);
   };
 
+  //Updating User:
+  const updateUser = () => {
+    Axios.put("http://localhost:5000/api/user/update", {
+      // id: id,
+      firstname: updateFirstName,
+      lastname: updateLastName,
+      email: updateEmail,
+      number: updateNumber,
+      // bio: updateUserBio,
+      password: updatePassword,
+      confirmpassword: updateConfirmPassword,
+    });
+  };
+
   //creating pets
   const createPet = () => {
-    console.log("i've been clicked");
     Axios.post("http://localhost:5000/createPets", {
       type: petFormData.type,
       name: petFormData.name,
@@ -123,6 +168,8 @@ export default function ContextProvider({ children }) {
     });
   };
 
+
+
   //login user
   async function loginUser(event) {
     event.preventDefault();
@@ -142,6 +189,7 @@ export default function ContextProvider({ children }) {
 
   //get current user
   const [currentUser, setCurrentUser] = useState("");
+
   useEffect(() => {
     (async () => {
       const response = await fetch("http://localhost:5000/api/user/users", {
@@ -150,12 +198,11 @@ export default function ContextProvider({ children }) {
         credentials: "include",
       });
       const content = await response.json();
-      setCurrentUser(content.firstname);
+      setCurrentUser(content);
     })();
   });
 
   //logout user:
-
   const logout = async () => {
     await fetch("http://localhost:5000/api/user/logout", {
       method: "POST",
@@ -211,6 +258,18 @@ export default function ContextProvider({ children }) {
         setCurrentUser,
         logout,
         authenticated,
+        userData,
+        setUserData,
+        setUpdateEmail,
+        setUpdatePassword,
+        setUpdateConfirmPassword,
+        setUpdateFirstName,
+        setUpdateLastName,
+        setUpdateNumber,
+        setUpdateUserBio,
+        updateUser,
+        EditPetFormData,
+        setEditPetFormData,
       }}
     >
       {children}

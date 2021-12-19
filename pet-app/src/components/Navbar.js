@@ -17,9 +17,13 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="leftSide" id={openLinks ? "open" : "close"}>
-        <img src={Logo} />
+        <Link exact to="/">
+          <img src={Logo} />
+        </Link>
         <span className="register">
-          {currentUser ? `Hello ${currentUser}` : `Nobody is logged in `}
+          {currentUser
+            ? `Hello ${currentUser.firstname}`
+            : `Nobody is logged in `}
         </span>
         {currentUser && (
           <Link to="/">
@@ -31,8 +35,7 @@ function Navbar() {
         <div className="hiddenLinks">
           <Link to="/"> Home </Link>
           <Link to="/menu"> Search Pets </Link>
-          <Link to="/profile"> Profile </Link>
-          <Link to="/addpet"> Add Pet </Link>
+          {currentUser.admin && <Link to="/admin"> Admin </Link>}
           <span className="register" onClick={handleOpen}>
             Register/Login
           </span>
@@ -41,8 +44,7 @@ function Navbar() {
       <div className="rightSide">
         <Link to="/"> Home </Link>
         <Link to="/menu"> Search Pets </Link>
-        <Link to="/profile"> Profile </Link>
-        <Link to="/addpet"> Add Pet </Link>
+        {currentUser.admin && <Link to="/admin"> Admin </Link>}
         <span className="register" onClick={handleOpen}>
           Register/Login
         </span>

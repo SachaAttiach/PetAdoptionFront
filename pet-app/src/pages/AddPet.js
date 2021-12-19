@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import Dashboard from "./Dashboard";
 import { Context } from "../Context";
 import "../styles/addpet.css";
 
@@ -14,104 +15,156 @@ function AddPet() {
       };
     });
   }
-
   return (
-    <div className="form-container">
-      <h1 className="menuTitle">Add Pets</h1>
-      <div className="form--form">
-        <input
-          type="text"
-          placeholder="Type of Pet"
-          className="form--input"
-          value={petFormData.type}
-          onChange={handleChange}
-          name="type"
-        />
-        <input
-          type="text"
-          placeholder="Name"
-          className="form--input"
-          value={petFormData.name}
-          onChange={handleChange}
-          name="name"
-        />
-        <input
-          type="text"
-          placeholder="Adoption Status"
-          className="form--input"
-          value={petFormData.adoptionStatus}
-          onChange={handleChange}
-          name="adoptionStatus"
-        />
-        <input
-          type="text"
-          placeholder="Picture URL"
-          className="form--input"
-          value={petFormData.picture}
-          onChange={handleChange}
-          name="picture"
-        />
-        <input
-          type="number"
-          placeholder="Height"
-          className="form--input"
-          value={petFormData.height}
-          onChange={handleChange}
-          name="height"
-        />
-        <input
-          type="number"
-          placeholder="Weight"
-          className="form--input"
-          value={petFormData.weight}
-          onChange={handleChange}
-          name="weight"
-        />
-        <input
-          type="text"
-          placeholder="Color"
-          className="form--input"
-          value={petFormData.color}
-          onChange={handleChange}
-          name="color"
-        />
-        <input
-          type="text"
-          placeholder="Bio"
-          className="form--input"
-          value={petFormData.bio}
-          onChange={handleChange}
-          name="bio"
-        />
-        <input
-          type="text"
-          placeholder="Dietery requirments"
-          className="form--input"
-          value={petFormData.diet}
-          onChange={handleChange}
-          name="dietery"
-        />
-        <input
-          type="text"
-          placeholder="Breed"
-          className="form--input"
-          value={petFormData.breed}
-          onChange={handleChange}
-          name="breed"
-        />
-        <div className="form--marketing">
-          <input
-            id="isHypoallergenic"
-            type="checkbox"
-            checked={petFormData.hypoallergenic}
-            name="hypoallergenic"
-            onChange={handleChange}
-          />
-          <label htmlFor="isHypoallergenic">Hypoallergenic?</label>
+    <div className="addpet-main-container">
+      <Dashboard />
+      <div className="addpet-container">
+        <div className="addpet-title">Add Pet</div>
+        <div className="addpet-content">
+          <form id="addpetform">
+            <div className="user-details">
+              <div className="input-box">
+                <span className="details">Type Of Pet</span>
+                <input
+                  type="text"
+                  placeholder="Type of Pet"
+                  value={petFormData.type}
+                  onChange={handleChange}
+                  name="type"
+                />
+              </div>
+              <div className="input-box">
+                <span className="details">Name</span>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={petFormData.name}
+                  onChange={handleChange}
+                  name="name"
+                />
+              </div>
+              {/* <div className="input-box">
+                <span className="details">Adoption Status</span>
+                <input
+                  type="text"
+                  placeholder="Adoption Status"
+                  value={petFormData.adoptionStatus}
+                  onChange={handleChange}
+                  name="adoptionStatus"
+                />
+              </div> */}
+              <div className="input-box">
+                <span className="details">Picture URL</span>
+                <input
+                  type="text"
+                  placeholder="Picture URL"
+                  value={petFormData.picture}
+                  onChange={handleChange}
+                  name="picture"
+                />
+              </div>
+              <div className="input-box">
+                <span className="details">Height</span>
+                <input
+                  type="number"
+                  placeholder="Height"
+                  value={petFormData.height}
+                  onChange={handleChange}
+                  name="height"
+                />
+              </div>
+              <div className="input-box">
+                <span className="details">Weight</span>
+                <input
+                  type="number"
+                  placeholder="Weight"
+                  value={petFormData.weight}
+                  onChange={handleChange}
+                  name="weight"
+                />
+              </div>
+              <div className="input-box">
+                <span className="details">Color</span>
+                <input
+                  type="text"
+                  placeholder="Color"
+                  value={petFormData.color}
+                  onChange={handleChange}
+                  name="color"
+                />
+              </div>
+              <div className="input-box">
+                <span className="details">Bio</span>
+                <input
+                  type="text"
+                  placeholder="Bio"
+                  value={petFormData.bio}
+                  onChange={handleChange}
+                  name="bio"
+                />
+              </div>
+              <div className="input-box">
+                <span className="details">Dietary requirments</span>
+                <input
+                  type="text"
+                  placeholder="Dietery requirments"
+                  value={petFormData.diet}
+                  onChange={handleChange}
+                  name="dietery"
+                />
+              </div>
+              <div className="input-box">
+                <span className="details">Breed</span>
+                <input
+                  type="text"
+                  placeholder="Breed"
+                  value={petFormData.breed}
+                  onChange={handleChange}
+                  name="breed"
+                />
+              </div>
+            </div>
+            <div className="gender-details">
+              <input
+                type="checkbox"
+                name="hypoallergenic"
+                // id="isHypoallergenic"
+                id="dot-1"
+                onChange={handleChange}
+                checked={petFormData.hypoallergenic}
+              />
+              <span className="gender-title">Hypoallergenic?</span>
+              <div className="category">
+                <label for="dot-1">
+                  <span className="dot one"></span>
+                  <span className="gender">Yes</span>
+                </label>
+              </div>
+            </div>
+            <div className="input-box">
+              <input
+                type="checkbox"
+                name="adoptionStatus"
+                // id="isHypoallergenic"
+                id="dot-2"
+                onChange={handleChange}
+                checked={petFormData.adoptionStatus}
+              />
+              <span className="AdoptionCheckbox">Available for Adoption?</span>
+              <div className="adoptioncategory">
+                <label for="dot-2">
+                  <span className="dot two"></span>
+                  <span className="adoptioncheckbox">Yes</span>
+                </label>
+              </div>
+            </div>
+            <div className="button">
+              <button className="addpetbutton" onClick={createPet}>
+                Add Pet
+              </button>
+            </div>
+          </form>
         </div>
-        <button onClick={createPet} className="form--submit">
-          Add Pet
-        </button>
       </div>
     </div>
   );

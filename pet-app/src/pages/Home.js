@@ -9,7 +9,7 @@ function Home() {
   return (
     <div className="home" style={{ backgroundImage: `url(${BannerImage})` }}>
       <div className="headerContainer">
-        <h1> Welcome {currentUser} </h1>
+        <h1> Welcome {currentUser.firstname} </h1>
         <br />
         <br />
         <br />
@@ -17,7 +17,12 @@ function Home() {
         <Link exact to="/menu">
           <button> Search For Pets </button>
         </Link>
-        <button style={{ marginLeft: "5%" }}> My Pets Page </button>
+        <Link exact to="/myPets">
+          <button style={{ marginLeft: "5%" }}> My Pets Page </button>
+        </Link>
+        <Link exact to="/usersettings">
+          <button style={{ marginLeft: "5%" }}> Profile Settings </button>
+        </Link>
       </div>
     </div>
   );

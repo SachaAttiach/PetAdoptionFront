@@ -62,6 +62,15 @@
   align-content: center;
 }
 
+.landing-paragraph {
+  margin-top: 5%;
+}
+.landingbutton {
+  margin-top: 3%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
 @media only screen and (max-width: 650px) {
   .home {
     justify-content: center;

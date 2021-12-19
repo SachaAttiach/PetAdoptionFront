@@ -1,17 +1,11 @@
-#sidebar {
+.sidebar_responsive {
   background: #020509;
   padding: 20px;
-  height: 100%;
-}
-
-.sidebar-container {
   display: flex;
-  height: 70vh;
-}
-
-.sidebar__img {
-  display: flex;
-  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  width: 25%;
 }
 
 .sidebar__title > div > img {
@@ -76,16 +70,12 @@
   color: #e65061;
   font-weight: 700;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .sidebar__logout > i {
   margin-right: 10px;
   font-size: 18px;
-}
-
-.sidebar_responsive {
-  width: 20%;
-  height: 100%;
 }
 
 @media only screen and (max-width: 978px) {
