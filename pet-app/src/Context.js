@@ -21,7 +21,26 @@ export default function ContextProvider({ children }) {
   const [registerLastName, setRegisterLastName] = useState("");
   const [registerNumber, setRegisterNumber] = useState(0);
   const [listOfUsers, setListOfUsers] = useState([]);
-  const [userBio, setUserBio] = useState("");
+
+  //get current user
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("http://localhost:5000/api/user/users", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const content = await response.json();
+      setCurrentUser(content);
+      setUpdateEmail(content.email);
+      setUpdateFirstName(content.firstname);
+      setUpdateLastName(content.lastname);
+      setUpdateNumber(content.number);
+      setUpdateUserBio(content.bio || "");
+    })();
+  }, []);
 
   //states for Updating User:
   const [updateEmail, setUpdateEmail] = useState("");
@@ -29,21 +48,22 @@ export default function ContextProvider({ children }) {
   const [updateConfirmPassword, setUpdateConfirmPassword] = useState("");
   const [updateFirstName, setUpdateFirstName] = useState("");
   const [updateLastName, setUpdateLastName] = useState("");
-  const [updateNumber, setUpdateNumber] = useState(0);
+  const [updateNumber, setUpdateNumber] = useState("");
   const [updateUserBio, setUpdateUserBio] = useState("");
 
   //States for adding receiving/adding pet from database
   const [listOfPets, setListOfPets] = useState([]);
+  const [pictureUrl, setPictureUrl] = useState("");
   const [petFormData, setPetFormData] = useState({
     type: "",
     name: "",
-    adoptionStatus: true,
+    adoptionStatus: "",
     picture: "",
-    height: 0,
-    weight: 0,
+    height: "",
+    weight: "",
     color: "",
     bio: "",
-    hypoallergenic: true,
+    hypoallergenic: false,
     dietery: "",
     breed: "",
   });
@@ -54,14 +74,34 @@ export default function ContextProvider({ children }) {
     name: "",
     adoptionStatus: "",
     picture: "",
-    height: 0,
-    weight: 0,
+    height: "",
+    weight: "",
     color: "",
     bio: "",
     hypoallergenic: true,
     dietery: "",
     breed: "",
+    adoptedBy: null,
   });
+
+  //function to add image:
+  const uploadImage = (event) => {
+    const files = event.target.files[0];
+    const formData = new FormData();
+    formData.append("upload_preset", "m6bqc7p6");
+    formData.append("file", files);
+    axios
+      .post("https://api.cloudinary.com/v1_1/dyfdduadc/image/upload", formData)
+      .then((response) =>
+        setPetFormData((prevFormData) => {
+          return {
+            ...prevFormData,
+            picture: String(response.data.secure_url),
+          };
+        })
+      )
+      .catch((err) => console.log(err));
+  };
 
   // States to receive individual pet data
   const [petData, setPetData] = useState({});
@@ -79,19 +119,17 @@ export default function ContextProvider({ children }) {
 
   // Receiving list of Users
   useEffect(() => {
-    Axios.get("http://localhost:5000/getUsers").then((response) => {
+    Axios.get("http://localhost:5000/users/getUsers").then((response) => {
       setListOfUsers(response.data);
     });
   }, []);
 
   //Receiving list of Pets
   useEffect(() => {
-    Axios.get("http://localhost:5000/getPets").then((response) => {
+    Axios.get("http://localhost:5000/pets/getPets").then((response) => {
       setListOfPets(response.data);
     });
   }, []);
-
-
 
   // creating user
   const createUser = () => {
@@ -118,25 +156,41 @@ export default function ContextProvider({ children }) {
       ]);
     });
     setRedirect(true);
+    window.location.reload();
   };
 
   //Updating User:
   const updateUser = () => {
-    Axios.put("http://localhost:5000/api/user/update", {
-      // id: id,
-      firstname: updateFirstName,
-      lastname: updateLastName,
-      email: updateEmail,
-      number: updateNumber,
-      // bio: updateUserBio,
-      password: updatePassword,
-      confirmpassword: updateConfirmPassword,
-    });
+    if (
+      (updatePassword || updateConfirmPassword) &&
+      updatePassword !== updateConfirmPassword
+    ) {
+      console.log("passwords must match");
+    } else {
+      console.log("updating user!!!!!");
+      const data = {
+        // id: id,
+        firstname: updateFirstName,
+        lastname: updateLastName,
+        email: updateEmail,
+        number: updateNumber,
+        bio: updateUserBio,
+      };
+      if (updatePassword) {
+        data.password = updatePassword;
+      }
+      fetch("http://localhost:5000/users/update", {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+    }
   };
 
   //creating pets
   const createPet = () => {
-    Axios.post("http://localhost:5000/createPets", {
+    Axios.post("http://localhost:5000/pets/createPets", {
       type: petFormData.type,
       name: petFormData.name,
       adoptionStatus: petFormData.adoptionStatus,
@@ -168,8 +222,6 @@ export default function ContextProvider({ children }) {
     });
   };
 
-
-
   //login user
   async function loginUser(event) {
     event.preventDefault();
@@ -186,21 +238,6 @@ export default function ContextProvider({ children }) {
     setAuthenticated(true);
     handleClose();
   }
-
-  //get current user
-  const [currentUser, setCurrentUser] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("http://localhost:5000/api/user/users", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-      const content = await response.json();
-      setCurrentUser(content);
-    })();
-  });
 
   //logout user:
   const logout = async () => {
@@ -239,8 +276,8 @@ export default function ContextProvider({ children }) {
         listOfUsers,
         setListOfUsers,
         createUser,
-        userBio,
-        setUserBio,
+        updateUserBio,
+        setUpdateUserBio,
         listOfPets,
         createPet,
         setPetFormData,
@@ -261,15 +298,24 @@ export default function ContextProvider({ children }) {
         userData,
         setUserData,
         setUpdateEmail,
+        updatePassword,
         setUpdatePassword,
+        updateConfirmPassword,
         setUpdateConfirmPassword,
+        updateFirstName,
         setUpdateFirstName,
+        updateLastName,
         setUpdateLastName,
+        updateNumber,
         setUpdateNumber,
-        setUpdateUserBio,
         updateUser,
         EditPetFormData,
         setEditPetFormData,
+        listOfUsers,
+        setPictureUrl,
+        pictureUrl,
+        uploadImage,
+        updateEmail,
       }}
     >
       {children}

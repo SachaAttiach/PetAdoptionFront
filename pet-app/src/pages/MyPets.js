@@ -1,37 +1,30 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../Context";
+import AdoptedPets from "./AdoptedPets";
+import SavedPets from "./SavedPets";
 
 function MyPets() {
-  const { handleOpen, currentUser } = useContext(Context);
+  const { handleOpen, currentUser, listOfPets } = useContext(Context);
   const [toggle, setToggle] = useState(false);
   const toggler = () => {
     toggle ? setToggle(false) : setToggle(true);
   };
+
   return (
-    <div>
-      <h1>This is my pets page</h1>
-      <button onClick={toggler}>{toggle ? `My Pets` : `Saved Pets`}</button>
+    <div className="petpage-container">
+      <h1 className="pet-title">My pets page</h1>
+      <div className="divbutton">
+        <button className="petpage-button" onClick={toggler}>
+          {toggle ? `Switch to: Adopted Pets` : `Switch to: Saved Pets`}
+        </button>
+      </div>
       {toggle ? (
-        <div>
-          <h5>
-            Saved Pets:
-            {currentUser.savedpets ? (
-              `You have no saved pets`
-            ) : (
-              <div>Here are your saved pets: {currentUser.savedpets}</div>
-            )}
-          </h5>
+        <div className="petpage-main">
+          <SavedPets />
         </div>
       ) : (
-        <div>
-          <h5>
-            Adopted Pets:
-            {currentUser.adoptedpets ? (
-              `You have no adopted pets`
-            ) : (
-              <div>Here are your adopted pets: {currentUser.adoptedpets}</div>
-            )}
-          </h5>
+        <div className="petpage-main">
+          <AdoptedPets />
         </div>
       )}
     </div>

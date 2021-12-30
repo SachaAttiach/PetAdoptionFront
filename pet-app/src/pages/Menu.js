@@ -8,7 +8,7 @@ function Menu() {
   const [searchHeight, setSearchHeight] = useState("");
   const [searchWeight, setSearchWeight] = useState("");
   const [searchType, setSearchType] = useState("");
-  const [searchAvailable, setSearchAvailable] = useState(false);
+  const [searchAvailable, setSearchAvailable] = useState("");
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
   const { listOfPets } = useContext(Context);
 
@@ -121,8 +121,9 @@ function Menu() {
               name="animalavailable"
             >
               <option value="">-- Choose Adopted Status --</option>
-              <option value="true">Adopted-</option>
-              <option value="false">Not Adopted</option>
+              <option value="adopted">Adopted</option>
+              <option value="available">Not Adopted</option>
+              <option value="fostered">Fostered</option>
             </select>
           </div>
         )}
@@ -133,6 +134,13 @@ function Menu() {
             if (searchType == "") {
               return menuItem;
             } else if (menuItem.type.includes(searchType)) {
+              return menuItem;
+            }
+          })
+          .filter((menuItem) => {
+            if (searchAvailable == "") {
+              return menuItem;
+            } else if (menuItem.adoptionStatus.includes(searchAvailable)) {
               return menuItem;
             }
           })
@@ -171,15 +179,15 @@ function Menu() {
               return menuItem.height >= 61;
             }
           })
-          .filter((menuItem) => {
-            if (searchAvailable == "") {
-              return menuItem;
-            } else if (searchAvailable == "true") {
-              return menuItem.adoptionStatus;
-            } else if (searchAvailable == "false") {
-              return !menuItem.adoptionStatus;
-            }
-          })
+          // .filter((menuItem) => {
+          //   if (searchAvailable == "") {
+          //     return menuItem;
+          //   } else if (searchAvailable == "adopted") {
+          //     return menuItem.adoptionStatus;
+          //   } else if (searchAvailable == "available") {
+          //     return !menuItem.adoptionStatus;
+          //   }
+          // })
           .map((menuItem, key) => {
             return (
               <div className="menuItem">
@@ -191,10 +199,7 @@ function Menu() {
                     style={{ backgroundImage: `url(${menuItem.picture})` }}
                   ></div>
                   <h2> {menuItem.name} </h2>
-                  <p>
-                    Status:
-                    {menuItem.adoptionStatus ? ` Adopted` : ` Not Adopted`}
-                  </p>
+                  <p>{`Status: ${menuItem.adoptionStatus}`}</p>
                 </Link>
               </div>
             );

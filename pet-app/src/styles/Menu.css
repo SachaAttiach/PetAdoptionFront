@@ -53,51 +53,6 @@
   transition: 0.3s ease-in;
 }
 
-@media only screen and (max-width: 650px) {
-  .home {
-    justify-content: center;
-    align-items: center;
-  }
-  .headerContainer h1,
-  .headerContainer p {
-  }
-
-  .headerContainer {
-    margin-left: 0px;
-    border-radius: 10px;
-    padding: 10px;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #121619;
-    color: white;
-  }
-
-  .headerContainer h1 {
-    font-size: 40px;
-    height: 30px;
-    color: white;
-  }
-
-  .headerContainer p {
-    font-size: 30px;
-    color: white;
-  }
-
-  .headerContainer button {
-    background-color: white;
-    color: #121619;
-    margin-bottom: 30px;
-  }
-
-  .headerContainer button:hover {
-    background-color: rgb(225, 225, 225);
-    color: #121619;
-  }
-}
-
 .menu {
   width: 100%;
   height: auto;
@@ -178,6 +133,9 @@
   height: 75vh;
   border: 2px solid red;
   background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .usercardbox {
   display: flex;
@@ -214,7 +172,13 @@
   max-width: 100%;
   vertical-align: top;
   opacity: 0.85;
+  margin-top: 0;
 }
+
+.backgroundImage {
+  height: 70%;
+}
+
 .snip1336 figcaption {
   width: 100%;
   background-color: #141414;
@@ -232,7 +196,7 @@
   border-width: 55px 0 0 400px;
   border-color: transparent transparent transparent #141414;
 }
-.snip1336 figcaption a {
+.snip1336 figcaption button {
   padding: 5px;
   border: 1px solid #ffffff;
   color: #ffffff;
@@ -247,7 +211,7 @@
   font-weight: 600;
   letter-spacing: 1px;
 }
-.snip1336 figcaption a:hover {
+.snip1336 figcaption button:hover {
   opacity: 1;
 }
 .snip1336 .profile {
@@ -260,11 +224,24 @@
   opacity: 1;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
-.snip1336 .follow {
+.snip1336 .adopt {
   margin-right: 4%;
   border-color: #2980b9;
   color: #2980b9;
+  background-color: black;
 }
+
+.snip1336 .save {
+  background-color: black;
+}
+
+.snip1336 .foster {
+  background-color: black;
+  border: 1px solid #8be4b0;
+  position: relative;
+  margin-left: 2%;
+}
+
 .snip1336 h2 {
   font-weight: 300;
   margin-bottom: 2%;
@@ -281,6 +258,11 @@
   margin-bottom: 1%;
 }
 
+.petname {
+  position: relative;
+  top: -17%;
+}
+
 .petedit-container {
   display: flex;
   flex-direction: column;
@@ -291,6 +273,76 @@
 
 .editPet {
   position: relative;
+}
+.adopt {
+  padding: 5px;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  margin: 10px 0;
+  display: inline-block;
+  opacity: 0.65;
+  width: 47%;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-right: 4%;
+  border-color: #2980b9;
+  color: #2980b9;
+}
+
+.adopt :hover {
+  opacity: 1;
+}
+
+.petpage-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-title {
+  display: flex;
+  justify-content: center;
+}
+
+.petpage-main {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  flex-direction: column;
+}
+
+.petpage-button {
+  display: flex;
+  justify-content: center;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  background-color: #4eb5f1;
+  text-align: center;
+  transition: all 0.2s;
+  width: 15%;
+}
+
+.petpage-button:hover {
+  background-color: #4095c6;
+}
+
+.divbutton {
+  display: flex;
+  justify-content: center;
+  padding-top: 2%;
+}
+
+.editIcon {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -428,5 +480,50 @@ button {
   textarea {
     max-width: 440px;
     resize: vertical;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .home {
+    justify-content: center;
+    align-items: center;
+  }
+  .headerContainer h1,
+  .headerContainer p {
+  }
+
+  .headerContainer {
+    margin-left: 0px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #121619;
+    color: white;
+  }
+
+  .headerContainer h1 {
+    font-size: 40px;
+    height: 30px;
+    color: white;
+  }
+
+  .headerContainer p {
+    font-size: 30px;
+    color: white;
+  }
+
+  .headerContainer button {
+    background-color: white;
+    color: #121619;
+    margin-bottom: 30px;
+  }
+
+  .headerContainer button:hover {
+    background-color: rgb(225, 225, 225);
+    color: #121619;
   }
 }

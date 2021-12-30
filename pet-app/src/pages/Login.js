@@ -1,4 +1,4 @@
-import Anakin from "../assets/anakin.jpeg";
+import Anakin from "../assets/catlogin.jpeg";
 import "../styles/Register.css";
 import React, { useState, useContext } from "react";
 import { Context } from "../Context";
@@ -21,7 +21,6 @@ function Login() {
     setRedirect,
   } = useContext(Context);
 
-  console.log(loginEmail, loginPassword);
   const style = {
     position: "absolute",
     top: "50%",

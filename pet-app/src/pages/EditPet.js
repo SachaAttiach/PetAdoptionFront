@@ -6,7 +6,7 @@ import "../styles/addpet.css";
 import Axios from "axios";
 
 function EditPet() {
-  const { createPet, EditPetFormData, setEditPetFormData } =
+  const { createPet, EditPetFormData, setEditPetFormData, uploadImage } =
     useContext(Context);
   const { petID } = useParams();
 
@@ -21,7 +21,7 @@ function EditPet() {
   }
 
   //   useEffect(() => {
-  //     Axios.put(`http://localhost:5000/updatePets/${petID}`, {}).then(
+  //     Axios.put(`http://localhost:5000/pets/updatePets/${petID}`, {}).then(
   //       (response) => {
   //         setPetData(response.data.element);
   //       }
@@ -30,7 +30,7 @@ function EditPet() {
 
   //Updating pet:
   const updatePet = (id) => {
-    Axios.put("http://localhost:5000/updatePets", {
+    Axios.put("http://localhost:5000/pets/updatePets", {
       id: petID,
       type: EditPetFormData.type,
       name: EditPetFormData.name,
@@ -70,7 +70,7 @@ function EditPet() {
               name="name"
             />
           </div>
-          <div className="input-box">
+          {/* <div className="input-box">
             <span className="details">Adoption Status</span>
             <input
               type="text"
@@ -79,8 +79,8 @@ function EditPet() {
               onChange={handleChange}
               name="adoptionStatus"
             />
-          </div>
-          <div className="input-box">
+          </div> */}
+          {/* <div className="input-box">
             <span className="details">Picture URL</span>
             <input
               type="text"
@@ -88,6 +88,18 @@ function EditPet() {
               value={EditPetFormData.picture}
               onChange={handleChange}
               name="picture"
+            />
+          </div> */}
+          <div className="input-box">
+            <span className="details">Upload Picture</span>
+            <label className="chosefile">Choose file</label>
+            <input
+              type="file"
+              // value={petFormData.picture}
+              onChange={uploadImage}
+              name="picture"
+              className="uploadpicturebutton"
+              placeholder="Choose File"
             />
           </div>
           <div className="input-box">
@@ -150,28 +162,55 @@ function EditPet() {
               name="breed"
             />
           </div>
-        </div>
-        <div className="gender-details">
-          <input
-            type="checkbox"
-            name="hypoallergenic"
-            // id="isHypoallergenic"
-            id="dot-1"
-            onChange={handleChange}
-            checked={EditPetFormData.hypoallergenic}
-          />
-          <span className="gender-title">Hypoallergenic?</span>
-          <div className="category">
-            <label for="dot-1">
-              <span className="dot one"></span>
-              <span className="gender">Yes</span>
-            </label>
+          <div className="input-box">
+            <span className="details">Adoption Status</span>
+            <input
+              type="text"
+              placeholder="Adoption Status"
+              value={EditPetFormData.adoptionStatus}
+              onChange={handleChange}
+              name="adoptionStatus"
+            />
           </div>
-        </div>
-        <div className="button">
-          <button className="editpetButton" onClick={() => updatePet(petID)}>
-            Update Pet
-          </button>
+          <div className="input-box">
+            <input
+              type="checkbox"
+              name="hypoallergenic"
+              // id="isHypoallergenic"
+              id="dot-1"
+              onChange={handleChange}
+              checked={EditPetFormData.hypoallergenic}
+            />
+            <span>Hypoallergenic?</span>
+            <div className="category">
+              <label htmlFor="dot-1">
+                <span className="dot one"></span>
+                <span>Yes</span>
+              </label>
+            </div>
+          </div>
+          {/* <div className="input-box">
+            <input
+              type="checkbox"
+              name="adoptionStatus"
+              // id="isHypoallergenic"
+              id="dot-2"
+              onChange={handleChange}
+              checked={EditPetFormData.adoptionStatus}
+            />
+            <span className="AdoptionCheckbox">Available for Adoption?</span>
+            <div className="adoptioncategory">
+              <label htmlFor="dot-2">
+                <span className="dot two"></span>
+                <span className="adoptioncheckbox">Yes</span>
+              </label>
+            </div>
+          </div> */}
+          <div className="input-box">
+            <button className="addpetbutton" onClick={() => updatePet(petID)}>
+              Update Pet
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -7,12 +7,19 @@ import Dashboard from "./Dashboard";
 function UserSettings() {
   const {
     setUpdateEmail,
+    updateEmail,
     setUpdatePassword,
+    updatePassword,
     setUpdateConfirmPassword,
+    updateConfirmedPassword,
     setUpdateFirstName,
+    updateFirstName,
     setUpdateLastName,
+    updateLastName,
     setUpdateNumber,
+    updateNumber,
     setUpdateUserBio,
+    updateUserBio,
     updateUser,
     currentUser,
   } = useContext(Context);
@@ -27,17 +34,17 @@ function UserSettings() {
         <h1 className="registertext"> Profile Details/Update </h1>
         {/* i could have issues from this being a form - check later */}
         <form id="contact-form">
-          <span>Current First Name: {currentUser.firstname}</span>
           <input
             name="firstname"
             placeholder="Update first name..."
             type="text"
+            value={updateFirstName}
             onChange={(event) => {
               setUpdateFirstName(event.target.value);
             }}
           />
-          <span>Current lastname: {currentUser.lastname}</span>
           <input
+            value={updateLastName}
             name="lastname"
             placeholder="Update last name..."
             type="text"
@@ -45,8 +52,9 @@ function UserSettings() {
               setUpdateLastName(event.target.value);
             }}
           />
-          <span>Current email: {currentUser.email}</span>
+
           <input
+            value={updateEmail}
             name="email"
             placeholder="Update email..."
             type="email"
@@ -54,26 +62,25 @@ function UserSettings() {
               setUpdateEmail(event.target.value);
             }}
           />
-          <span>Current number: {currentUser.number}</span>
           <input
+            value={updateNumber}
             name="number"
             placeholder="Update phone number..."
-            type="number"
             onChange={(event) => {
               setUpdateNumber(event.target.value);
             }}
           />
-          {/* <span>Add a Bio</span>
-            <input
-              name="userbio"
-              type="text"
-              placeholder="User Bio..."
-              onChange={(event) => {
-                setUpdateUserBio(event.target.value);
-              }}
-            /> */}
-          <label htmlFor="password">Password</label>
           <input
+            value={updateUserBio}
+            name="userbio"
+            type="text"
+            placeholder="User Bio..."
+            onChange={(event) => {
+              setUpdateUserBio(event.target.value);
+            }}
+          />
+          <input
+            value={updatePassword}
             name="password"
             type="password"
             placeholder="Password..."
@@ -81,8 +88,8 @@ function UserSettings() {
               setUpdatePassword(event.target.value);
             }}
           />
-          <label htmlFor="confirmpassword">Confirm Password</label>
           <input
+            value={updateConfirmedPassword}
             name="confirmpassword"
             type="password"
             placeholder="Password..."
@@ -90,7 +97,14 @@ function UserSettings() {
               setUpdateConfirmPassword(event.target.value);
             }}
           />
-          <button onClick={updateUser}> Save Changes </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              updateUser();
+            }}
+          >
+            Save Changes
+          </button>
         </form>
       </div>
     </div>
