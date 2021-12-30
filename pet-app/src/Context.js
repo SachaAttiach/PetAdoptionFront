@@ -69,7 +69,7 @@ export default function ContextProvider({ children }) {
   });
 
   //state for editing the pets
-  const [EditPetFormData, setEditPetFormData] = useState({
+  const [editPetFormData, setEditPetFormData] = useState({
     type: "",
     name: "",
     adoptionStatus: "",
@@ -186,6 +186,30 @@ export default function ContextProvider({ children }) {
         body: JSON.stringify(data),
       });
     }
+  };
+
+  //Updating pets:
+  const updatePet = () => {
+    console.log("updating pet!!!!!");
+    const data = {
+      type: editPetFormData.type,
+      name: editPetFormData.name,
+      adoptionStatus: editPetFormData.adoptionStatus,
+      picture: editPetFormData.picture,
+      height: editPetFormData.height,
+      weight: editPetFormData.weight,
+      color: editPetFormData.color,
+      bio: editPetFormData.bio,
+      hypoallergenic: editPetFormData.hypoallergenic,
+      dietery: editPetFormData.diet,
+      breed: editPetFormData.breed,
+    };
+    fetch("http://localhost:5000/pets/update", {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
   };
 
   //creating pets
@@ -309,13 +333,14 @@ export default function ContextProvider({ children }) {
         updateNumber,
         setUpdateNumber,
         updateUser,
-        EditPetFormData,
+        editPetFormData,
         setEditPetFormData,
         listOfUsers,
         setPictureUrl,
         pictureUrl,
         uploadImage,
         updateEmail,
+        updatePet,
       }}
     >
       {children}

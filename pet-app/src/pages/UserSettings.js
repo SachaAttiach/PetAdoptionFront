@@ -32,7 +32,6 @@ function UserSettings() {
       ></div>
       <div className="rightSide">
         <h1 className="registertext"> Profile Details/Update </h1>
-        {/* i could have issues from this being a form - check later */}
         <form id="contact-form">
           <input
             name="firstname"

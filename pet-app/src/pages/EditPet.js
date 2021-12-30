@@ -6,8 +6,13 @@ import "../styles/addpet.css";
 import Axios from "axios";
 
 function EditPet() {
-  const { createPet, EditPetFormData, setEditPetFormData, uploadImage } =
-    useContext(Context);
+  const {
+    createPet,
+    editPetFormData,
+    setEditPetFormData,
+    uploadImage,
+    updatePet,
+  } = useContext(Context);
   const { petID } = useParams();
 
   function handleChange(event) {
@@ -28,24 +33,6 @@ function EditPet() {
   //     );
   //   }, []);
 
-  //Updating pet:
-  const updatePet = (id) => {
-    Axios.put("http://localhost:5000/pets/updatePets", {
-      id: petID,
-      type: EditPetFormData.type,
-      name: EditPetFormData.name,
-      adoptionStatus: EditPetFormData.adoptionStatus,
-      picture: EditPetFormData.picture,
-      height: EditPetFormData.height,
-      weight: EditPetFormData.weight,
-      color: EditPetFormData.color,
-      bio: EditPetFormData.bio,
-      hypoallergenic: EditPetFormData.hypoallergenic,
-      dietery: EditPetFormData.diet,
-      breed: EditPetFormData.breed,
-    });
-  };
-
   return (
     <div className="addpet-content">
       <form id="addpetform">
@@ -55,7 +42,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Type of Pet"
-              value={EditPetFormData.type}
+              value={editPetFormData.type}
               onChange={handleChange}
               name="type"
             />
@@ -65,7 +52,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Name"
-              value={EditPetFormData.name}
+              value={editPetFormData.name}
               onChange={handleChange}
               name="name"
             />
@@ -75,7 +62,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Adoption Status"
-              value={EditPetFormData.adoptionStatus}
+              value={editPetFormData.adoptionStatus}
               onChange={handleChange}
               name="adoptionStatus"
             />
@@ -85,7 +72,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Picture URL"
-              value={EditPetFormData.picture}
+              value={editPetFormData.picture}
               onChange={handleChange}
               name="picture"
             />
@@ -107,7 +94,7 @@ function EditPet() {
             <input
               type="number"
               placeholder="Height"
-              value={EditPetFormData.height}
+              value={editPetFormData.height}
               onChange={handleChange}
               name="height"
             />
@@ -117,7 +104,7 @@ function EditPet() {
             <input
               type="number"
               placeholder="Weight"
-              value={EditPetFormData.weight}
+              value={editPetFormData.weight}
               onChange={handleChange}
               name="weight"
             />
@@ -127,7 +114,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Color"
-              value={EditPetFormData.color}
+              value={editPetFormData.color}
               onChange={handleChange}
               name="color"
             />
@@ -137,7 +124,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Bio"
-              value={EditPetFormData.bio}
+              value={editPetFormData.bio}
               onChange={handleChange}
               name="bio"
             />
@@ -147,7 +134,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Dietery requirments"
-              value={EditPetFormData.diet}
+              value={editPetFormData.diet}
               onChange={handleChange}
               name="dietery"
             />
@@ -157,7 +144,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Breed"
-              value={EditPetFormData.breed}
+              value={editPetFormData.breed}
               onChange={handleChange}
               name="breed"
             />
@@ -167,7 +154,7 @@ function EditPet() {
             <input
               type="text"
               placeholder="Adoption Status"
-              value={EditPetFormData.adoptionStatus}
+              value={editPetFormData.adoptionStatus}
               onChange={handleChange}
               name="adoptionStatus"
             />
@@ -179,7 +166,7 @@ function EditPet() {
               // id="isHypoallergenic"
               id="dot-1"
               onChange={handleChange}
-              checked={EditPetFormData.hypoallergenic}
+              checked={editPetFormData.hypoallergenic}
             />
             <span>Hypoallergenic?</span>
             <div className="category">
@@ -207,7 +194,12 @@ function EditPet() {
             </div>
           </div> */}
           <div className="input-box">
-            <button className="addpetbutton" onClick={() => updatePet(petID)}>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                updatePet();
+              }}
+            >
               Update Pet
             </button>
           </div>
