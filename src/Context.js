@@ -117,8 +117,6 @@ export default function ContextProvider({ children }) {
     });
   }, []);
 
-  
-
   // creating user
   const createUser = () => {
     Axios.post("http://localhost:5000/api/user/register", {
@@ -144,7 +142,6 @@ export default function ContextProvider({ children }) {
       ]);
     });
     setRedirect(true);
-    window.location.reload();
   };
 
   //Updating User:

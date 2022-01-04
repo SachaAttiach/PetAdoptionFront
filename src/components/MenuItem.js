@@ -31,7 +31,7 @@ function MenuItem() {
     })();
   }, [petData.adoptionStatus, petData.savedStatus]);
 
-  const handleAdoption = async () => {
+  const handleAdoption = () => {
     fetch(`http://localhost:5000/pets/adopt/${petID}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -44,9 +44,13 @@ function MenuItem() {
         return response.json();
       })
       .then((data) => {
-        setPetData(data);
+        if (data === "You already own this pet" || "Already adopted") {
+          alert(data);
+        } else setPetData(data);
       });
   };
+
+  console.log(petData);
 
   const handleSave = async () => {
     Axios.put(
@@ -88,9 +92,13 @@ function MenuItem() {
         return response.json();
       })
       .then((data) => {
-        setPetData(data);
+        if (data === "Already Fostered") {
+          alert(data);
+        } else setPetData(data);
       });
   };
+
+  console.log(petData);
   const handleReturn = async () => {
     fetch(`http://localhost:5000/pets/return/${petID}`, {
       method: "PUT",
@@ -101,7 +109,9 @@ function MenuItem() {
         return response.json();
       })
       .then((data) => {
-        setPetData(data);
+        if (data === "You don't own this pet") {
+          alert(data);
+        } else setPetData(data);
       });
   };
 
