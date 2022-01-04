@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import Dashboard from "./Dashboard";
-import { Context } from "../Context";
+import { Context } from "../../Context";
 import { useParams } from "react-router-dom";
-import "../styles/addpet.css";
+import "../../styles/addpet.css";
 import Axios from "axios";
 
 function EditPet() {
-  const { createPet, uploadImage, setPetData, petData, currentUser } =
-    useContext(Context);
+  const { uploadImage, setPetData, petData, currentUser } = useContext(Context);
   const { petID } = useParams();
 
   useEffect(() => {
@@ -29,14 +27,6 @@ function EditPet() {
       };
     });
   }
-
-  //   useEffect(() => {
-  //     Axios.put(`http://localhost:5000/pets/updatePets/${petID}`, {}).then(
-  //       (response) => {
-  //         setPetData(response.data.element);
-  //       }
-  //     );
-  //   }, []);
 
   //state for editing the pets
   const [editPetFormData, setEditPetFormData] = useState({
@@ -103,32 +93,12 @@ function EditPet() {
               name="name"
             />
           </div>
-          {/* <div className="input-box">
-            <span className="details">Adoption Status</span>
-            <input
-              type="text"
-              placeholder="Adoption Status"
-              value={editPetFormData.adoptionStatus}
-              onChange={handleChange}
-              name="adoptionStatus"
-            />
-          </div> */}
-          {/* <div className="input-box">
-            <span className="details">Picture URL</span>
-            <input
-              type="text"
-              placeholder="Picture URL"
-              value={editPetFormData.picture}
-              onChange={handleChange}
-              name="picture"
-            />
-          </div> */}
+
           <div className="input-box">
             <span className="details">Upload Picture</span>
             <label className="chosefile">Choose file</label>
             <input
               type="file"
-              // value={petFormData.picture}
               onChange={uploadImage}
               name="picture"
               className="uploadpicturebutton"
@@ -222,23 +192,6 @@ function EditPet() {
               </label>
             </div>
           </div>
-          {/* <div className="input-box">
-            <input
-              type="checkbox"
-              name="adoptionStatus"
-              // id="isHypoallergenic"
-              id="dot-2"
-              onChange={handleChange}
-              checked={EditPetFormData.adoptionStatus}
-            />
-            <span className="AdoptionCheckbox">Available for Adoption?</span>
-            <div className="adoptioncategory">
-              <label htmlFor="dot-2">
-                <span className="dot two"></span>
-                <span className="adoptioncheckbox">Yes</span>
-              </label>
-            </div>
-          </div> */}
           <div className="input-box">
             <button
               onClick={(e) => {

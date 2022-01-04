@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../Context";
-import "../styles/Menu.css";
+import { Context } from "../../Context";
+import "../../styles/Menu.css";
 import Dashboard from "./Dashboard";
 
 function AllPets() {

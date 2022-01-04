@@ -213,6 +213,13 @@
 .snip1336 figcaption button:hover {
   opacity: 1;
 }
+
+.textfield {
+  position: relative;
+  top: -33%;
+  left: 5%;
+}
+
 .snip1336 .profile {
   border-radius: 50%;
   position: absolute;

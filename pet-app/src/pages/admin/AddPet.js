@@ -1,18 +1,11 @@
 import React, { useContext } from "react";
 import Dashboard from "./Dashboard";
-import { Context } from "../Context";
-import "../styles/addpet.css";
-import axios from "axios";
+import { Context } from "../../Context";
+import "../../styles/addpet.css";
 
 function AddPet() {
-  const {
-    createPet,
-    setPetFormData,
-    petFormData,
-    setPictureUrl,
-    pictureUrl,
-    uploadImage,
-  } = useContext(Context);
+  const { createPet, setPetFormData, petFormData, uploadImage } =
+    useContext(Context);
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -52,39 +45,18 @@ function AddPet() {
                   name="name"
                 />
               </div>
-              {/* <div className="input-box">
-                <span className="details">Adoption Status</span>
-                <input
-                  type="text"
-                  placeholder="Adoption Status"
-                  value={petFormData.adoptionStatus}
-                  onChange={handleChange}
-                  name="adoptionStatus"
-                />
-              </div> */}
+
               <div className="input-box">
                 <span className="details">Upload Picture</span>
                 <label className="chosefile">Choose file</label>
                 <input
                   type="file"
-                  // value={petFormData.picture}
                   onChange={uploadImage}
                   name="picture"
                   className="uploadpicturebutton"
                   placeholder="Choose File"
                 />
               </div>
-
-              {/* <div className="input-box">
-                <span className="details">Picture URL</span>
-                <input
-                  type="text"
-                  placeholder="Picture URL"
-                  value={petFormData.picture}
-                  onChange={handleChange}
-                  name="picture"
-                />
-              </div> */}
               <div className="input-box">
                 <span className="details">Height</span>
                 <input
@@ -171,24 +143,6 @@ function AddPet() {
                   </label>
                 </div>
               </div>
-              {/* <div className="input-box">
-                <input
-                  type="checkbox"
-                  name="adoptionStatus"
-                  id="dot-2"
-                  onChange={handleChange}
-                  checked={petFormData.adoptionStatus}
-                />
-                <span className="AdoptionCheckbox">
-                  Available for Adoption?
-                </span>
-                <div className="adoptioncategory">
-                  <label htmlFor="dot-2">
-                    <span className="dot two"></span>
-                    <span className="yesbox">Yes</span>
-                  </label>
-                </div>
-              </div> */}
               <div className="input-box">
                 <button className="addpetbutton" onClick={createPet}>
                   Add Pet

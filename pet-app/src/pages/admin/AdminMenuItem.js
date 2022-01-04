@@ -1,7 +1,7 @@
 import React from "react";
-import EditPet from "../pages/EditPet";
+import EditPet from "./EditPet";
 import { useContext, useEffect, useState } from "react";
-import { Context } from "../Context";
+import { Context } from "../../Context";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";

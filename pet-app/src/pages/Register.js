@@ -1,6 +1,6 @@
 import Harri from "../assets/harri.jpeg";
 import "../styles/Register.css";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Context";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -10,7 +10,6 @@ import Login from "./Login";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Redirect } from "react-router-dom";
 
 const schema = yup.object().shape({
   firstname: yup.string().required(),
@@ -33,11 +32,8 @@ function Register() {
     setRegisterFirstName,
     setRegisterLastName,
     setRegisterNumber,
-    registerPassword,
-    registerConfirmPassword,
     createUser,
     redirect,
-    setRedirect,
   } = useContext(Context);
 
   const style = {
@@ -83,7 +79,6 @@ function Register() {
               ></div>
               <div className="rightSide">
                 <h1 className="registertext"> Register </h1>
-                {/* i could have issues from this being a form - check later */}
                 <form onSubmit={handleSubmit(submitForm)} id="contact-form">
                   <label htmlFor="firstname">First Name</label>
                   <input
@@ -95,7 +90,6 @@ function Register() {
                       setRegisterFirstName(event.target.value);
                     }}
                   />
-                  {/* <p>{errors.firstname?.message}</p> */}
                   <label className="lastnamelabel" htmlFor="lastname">
                     Last Name
                   </label>

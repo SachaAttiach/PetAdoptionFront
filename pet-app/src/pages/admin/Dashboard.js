@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
-import AddPet from "./AddPet";
-import UserSettings from "./UserSettings";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
-import { Context } from "../Context";
-import "../styles/dashboard.css";
+import { Context } from "../../Context";
+import "../../styles/dashboard.css";
 
 const Dashboard = () => {
   const { logout } = useContext(Context);

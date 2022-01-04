@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react";
-import { Context } from "../Context";
+import React, { useState } from "react";
 import AdoptedPets from "./AdoptedPets";
 import SavedPets from "./SavedPets";
 
 function MyPets() {
-  const { handleOpen, currentUser, listOfPets } = useContext(Context);
   const [toggle, setToggle] = useState(false);
   const toggler = () => {
     toggle ? setToggle(false) : setToggle(true);

@@ -5,7 +5,7 @@ import "../styles/Home.css";
 import { Context } from "../Context";
 
 function Home() {
-  const { handleOpen, currentUser } = useContext(Context);
+  const { currentUser } = useContext(Context);
   return (
     <div className="home" style={{ backgroundImage: `url(${BannerImage})` }}>
       <div className="headerContainer">

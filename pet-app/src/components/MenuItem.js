@@ -1,8 +1,7 @@
 import React from "react";
-import EditPet from "../pages/EditPet";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../Context";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Axios from "axios";
 import heart from "../assets/paw.gif";
 
@@ -20,8 +19,6 @@ function MenuItem() {
     );
   }, []);
 
- 
-
   useEffect(() => {
     (async () => {
       const response = await fetch("http://localhost:5000/api/user/users", {
@@ -33,20 +30,6 @@ function MenuItem() {
       setCurrentUser(content);
     })();
   }, [petData.adoptionStatus, petData.savedStatus]);
-
-  // const handleAdoption = async () => {
-  //   Axios.put(
-  //     `http://localhost:5000/pets/adopt/${petID}`,
-  //     {
-  //       adoptionStatus: "adopted",
-  //       userID: currentUser._id,
-  //     },
-  //     { withCredentials: true }
-  //   ).then((response) => {
-  //     const { data } = response;
-  //     setPetData(data);
-  //   });
-  // };
 
   const handleAdoption = async () => {
     fetch(`http://localhost:5000/pets/adopt/${petID}`, {
@@ -64,22 +47,7 @@ function MenuItem() {
         setPetData(data);
       });
   };
-  // const handleSave = async () => {
-  //   fetch(`http://localhost:5000/pets/save/${petID}`, {
-  //     method: "PUT",
-  //     body: JSON.stringify({
-  //       userID: currentUser._id,
-  //       savedStatus: "saved",
-  //     }),
-  //     credentials: "include",
-  //   })
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setPetData(data);
-  //     });
-  // };
+
   const handleSave = async () => {
     Axios.put(
       `http://localhost:5000/pets/save/${petID}`,

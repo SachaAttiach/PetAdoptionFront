@@ -1,6 +1,6 @@
 import Anakin from "../assets/catlogin.jpeg";
 import "../styles/Register.css";
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Context";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -12,13 +12,10 @@ function Login() {
   const {
     openLogin,
     handleCloseLogin,
-    loginEmail,
-    loginPassword,
     setLoginEmail,
     setLoginPassword,
     loginUser,
     redirect,
-    setRedirect,
   } = useContext(Context);
 
   const style = {

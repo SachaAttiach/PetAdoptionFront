@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
-import { Context } from "../Context";
+import React, { useContext } from "react";
+import { Context } from "../../Context";
 import { Link } from "react-router-dom";
 
-function SavedPets() {
-  const { handleOpen, currentUser, listOfPets } = useContext(Context);
+function AdoptedPets() {
+  const { currentUser, listOfPets } = useContext(Context);
 
   const tempObj = {};
   listOfPets.forEach((val) => (tempObj[val._id] = val));
-  const pets = currentUser.savedpets
-    ? currentUser.savedpets.map((val, key) => {
+  const pets = currentUser.adoptedPets
+    ? currentUser.adoptedPets.map((val, key) => {
         let usersPets = tempObj[val];
         return usersPets;
       })
@@ -17,8 +17,8 @@ function SavedPets() {
   return (
     <div className="petpage-main">
       <h5 style={{ paddingLeft: "2%" }}>
-        Saved Pets:
-        {currentUser.savedpets ? <div></div> : `You have no saved pets`}
+        Adopted Pets:
+        {currentUser.adoptedPets ? <div></div> : `You have no adopted pets`}
       </h5>
 
       {pets.map((pet) => (
@@ -37,4 +37,4 @@ function SavedPets() {
   );
 }
 
-export default SavedPets;
+export default AdoptedPets;

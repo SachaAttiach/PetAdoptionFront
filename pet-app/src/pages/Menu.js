@@ -16,15 +16,6 @@ function Menu() {
     setShowAdvancedSearch(!showAdvancedSearch);
   };
 
-  function handleChange(event) {
-    const { name, value, type, checked } = event.target;
-    setSearchAvailable((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
-  }
   return (
     <div className="menu">
       <h1 className="menuTitle">Search Pets</h1>
@@ -36,7 +27,6 @@ function Menu() {
 
           <select
             id="animaltype"
-            // value={}
             onChange={(event) => {
               setSearchType(event.target.value);
             }}
@@ -46,7 +36,6 @@ function Menu() {
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
           </select>
-          {/* {console.log(searchType)} */}
 
           <button className="SearchButton" onClick={toggleAdvanced}>
             {showAdvancedSearch ? `Basic Search` : `Advanced Search`}
@@ -97,24 +86,10 @@ function Menu() {
               <option value={60}>30-60cm</option>
               <option value={61}>60+</option>
             </select>
-
-            {/* <div className="availableCheck">
-              <label className="availabletext" htmlFor="isAvailable">
-                Available
-              </label>
-              <input
-                type="checkbox"
-                name="adoptionStatus"
-                onChange={handleChange}
-                checked={searchAvailable.adoptionStatus}
-              />
-              {console.log(searchAvailable)}
-            </div> */}
             <label htmlFor="animaltype">Availability</label>
             <br />
             <select
               id="animalavailable"
-              // value={}
               onChange={(event) => {
                 setSearchAvailable(event.target.value);
               }}
@@ -179,15 +154,6 @@ function Menu() {
               return menuItem.height >= 61;
             }
           })
-          // .filter((menuItem) => {
-          //   if (searchAvailable == "") {
-          //     return menuItem;
-          //   } else if (searchAvailable == "adopted") {
-          //     return menuItem.adoptionStatus;
-          //   } else if (searchAvailable == "available") {
-          //     return !menuItem.adoptionStatus;
-          //   }
-          // })
           .map((menuItem, key) => {
             return (
               <div className="menuItem">

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../Context";
 import Cat from "../assets/bettercat.jpeg";
 import "../styles/Home.css";
-import Dashboard from "./Dashboard";
+import Dashboard from "./admin/Dashboard";
 
 function UserSettings() {
   const {

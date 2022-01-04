@@ -19,7 +19,7 @@ function Navbar() {
     <div className="navbar">
       <div className="leftSide" id={openLinks ? "open" : "close"}>
         <Link exact to="/">
-          <img src={Logo} />
+          <img src={Logo} alt="logo" />
         </Link>
         <span className="register">
           {authenticated && `Hello ${currentUser.firstname}`}

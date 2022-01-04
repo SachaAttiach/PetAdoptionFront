@@ -1,11 +1,10 @@
 import React from "react";
 import Dashboard from "./Dashboard";
-import "../styles/Menu.css";
-import dogLanding from "../assets/landing.gif";
-import german from "../assets/german.gif";
-import bamba from "../assets/bamba.gif";
-import bullie from "../assets/bullie.gif";
-import labrador from "../assets/labrador.gif";
+import "../../styles/Menu.css";
+import german from "../../assets/german.gif";
+import bamba from "../../assets/bamba.gif";
+import bullie from "../../assets/bullie.gif";
+import labrador from "../../assets/labrador.gif";
 
 function Admin() {
   return (

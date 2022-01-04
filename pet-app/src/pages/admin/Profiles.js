@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { Context } from "../Context";
+import { Context } from "../../Context";
 import { Link } from "react-router-dom";
-import "../styles/Profile.css";
+import "../../styles/Profile.css";
 import Dashboard from "./Dashboard";
-import Cat from "../assets/bettercat.jpeg";
 
 function Profiles() {
   const { listOfUsers } = useContext(Context);

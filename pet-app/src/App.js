@@ -3,24 +3,22 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
-import Profiles from "./pages/Profiles";
-import Admin from "./pages/Admin";
+import Profiles from "./pages/admin/Profiles";
+import Admin from "./pages/admin/Admin";
 import Register from "./pages/Register";
 import UserSettings from "./pages/UserSettings";
-import AddPet from "./pages/AddPet";
+import AddPet from "./pages/admin/AddPet";
 import MenuItem from "./components/MenuItem";
-import UserItem from "./components/UserItem";
-import MyPets from "./pages/MyPets";
+import UserItem from "./pages/admin/UserItem";
+import MyPets from "./pages/PetPage/MyPets";
 import Landing from "./pages/Landing";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import ContextProvider from "./Context";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/admin/Dashboard";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
-import react, { useContext } from "react";
-import { Context } from "./Context";
-import AllPets from "./pages/AllPets";
-import AdminMenuItem from "./components/AdminMenuItem";
+import AllPets from "./pages/admin/AllPets";
+import AdminMenuItem from "./pages/admin/AdminMenuItem";
 
 function App() {
   return (

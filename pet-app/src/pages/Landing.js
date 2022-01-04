@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import dogLanding from "../assets/landing.gif";
 import "../styles/Home.css";
 import { Context } from "../Context";

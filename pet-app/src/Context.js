@@ -90,7 +90,6 @@ export default function ContextProvider({ children }) {
 
   // States to receive individual pet data
   const [petData, setPetData] = useState({});
-  const [loginStatus, setLoginStatus] = useState("");
 
   // States to receive individual pet data
   const [userData, setUserData] = useState({});
@@ -111,10 +110,14 @@ export default function ContextProvider({ children }) {
 
   //Receiving list of Pets
   useEffect(() => {
-    Axios.get("http://localhost:5000/pets/getPets").then((response) => {
+    Axios.get("http://localhost:5000/pets/getPets", {
+      userID: currentUser._id,
+    }).then((response) => {
       setListOfPets(response.data);
     });
   }, []);
+
+  
 
   // creating user
   const createUser = () => {
@@ -154,7 +157,6 @@ export default function ContextProvider({ children }) {
     } else {
       console.log("updating user!!!!!");
       const data = {
-        // id: id,
         firstname: updateFirstName,
         lastname: updateLastName,
         email: updateEmail,
@@ -172,7 +174,6 @@ export default function ContextProvider({ children }) {
       });
     }
   };
-  console.log(currentUser._id);
 
   //creating pets
   const createPet = (event) => {
@@ -210,46 +211,6 @@ export default function ContextProvider({ children }) {
       ]);
     });
   };
-
-  // const createPet = async (event) => {
-  //   event.preventDefault();
-  //   fetch("http://localhost:5000/pets/createPets", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       userID: currentUser._id,
-  //       type: petFormData.type,
-  //       name: petFormData.name,
-  //       adoptionStatus: petFormData.adoptionStatus,
-  //       picture: petFormData.picture,
-  //       height: petFormData.height,
-  //       weight: petFormData.weight,
-  //       color: petFormData.color,
-  //       bio: petFormData.bio,
-  //       hypoallergenic: petFormData.hypoallergenic,
-  //       dietery: petFormData.diet,
-  //       breed: petFormData.breed,
-  //     }),
-  //     credentials: "include",
-  //   }).then((response) => {
-  //     setListOfPets([
-  //       ...listOfPets,
-  //       {
-  //         userID: currentUser._id,
-  //         type: petFormData.type,
-  //         name: petFormData.name,
-  //         adoptionStatus: petFormData.adoptionStatus,
-  //         picture: petFormData.picture,
-  //         height: petFormData.height,
-  //         weight: petFormData.weight,
-  //         color: petFormData.color,
-  //         bio: petFormData.bio,
-  //         hypoallergenic: petFormData.hypoallergenic,
-  //         dietery: petFormData.diet,
-  //         breed: petFormData.breed,
-  //       },
-  //     ]);
-  //   });
-  // };
 
   //login user
   async function loginUser(event) {
@@ -338,7 +299,6 @@ export default function ContextProvider({ children }) {
         updateNumber,
         setUpdateNumber,
         updateUser,
-        listOfUsers,
         setPictureUrl,
         pictureUrl,
         uploadImage,
