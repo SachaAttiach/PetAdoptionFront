@@ -7,8 +7,7 @@ import Axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 
 function AdminMenuItem() {
-  const { petData, setPetData, handleAdoption, currentUser } =
-    useContext(Context);
+  const { petData, setPetData } = useContext(Context);
   const { petID } = useParams();
 
   useEffect(() => {
@@ -39,9 +38,6 @@ function AdminMenuItem() {
               </span>
             </h2>
             <div className="petname">
-              <div className="editIcon" onClick={toggleEdit}>
-                <EditIcon />
-              </div>
               <p>Height: {petData.height}</p>
               <p>weight: {petData.weight}</p>
               <p>Bio: {petData.bio}</p>
@@ -50,17 +46,11 @@ function AdminMenuItem() {
               <p>Breed:{petData.breed}</p>
               <p>
                 Adoption Status:
-                {petData.adoptionStatus ? ` Adopted` : ` Not Adopted`}
+                {petData.adoptionStatus}
               </p>
-              <button className="adopt">
-                {petData.adoptedBy
-                  ? petData.adoptedBy === currentUser._id
-                    ? "Unadopt"
-                    : ` Return To Adoption Centre`
-                  : ` Adopt me`}
-              </button>
-              <button className="save">Save for Later</button>
-              <button className="foster">Foster</button>
+              <div className="editIcon" onClick={toggleEdit}>
+                <EditIcon />
+              </div>
             </div>
           </figcaption>
         </div>

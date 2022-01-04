@@ -7,7 +7,8 @@ import "../styles/Navbar.css";
 import { Context } from "../Context";
 
 function Navbar() {
-  const { open, handleOpen, currentUser, logout } = useContext(Context);
+  const { open, handleOpen, currentUser, logout, authenticated } =
+    useContext(Context);
 
   const [openLinks, setOpenLinks] = useState(false);
 
@@ -21,11 +22,9 @@ function Navbar() {
           <img src={Logo} />
         </Link>
         <span className="register">
-          {currentUser
-            ? `Hello ${currentUser.firstname}`
-            : `Nobody is logged in `}
+          {authenticated && `Hello ${currentUser.firstname}`}
         </span>
-        {currentUser && (
+        {authenticated && (
           <Link to="/">
             <span className="register" onClick={logout}>
               Logout

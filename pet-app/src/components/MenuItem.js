@@ -7,22 +7,20 @@ import Axios from "axios";
 import heart from "../assets/paw.gif";
 
 function MenuItem() {
-  const { petData, setPetData, currentUser, setCurrentUser } =
+  const { petData, setPetData, currentUser, setCurrentUser, listOfPets } =
     useContext(Context);
   const { petID } = useParams();
 
   useEffect(() => {
     Axios.get(`http://localhost:5000/pets/getPets/${petID}`).then(
       (response) => {
+        console.log("its refreshing");
         setPetData(response.data.element);
       }
     );
   }, []);
 
-  // useEffect(() => {
-  //   if (!currentUser) return;
-  //   console.log(currentUser.adoptedPets.includes(petID));
-  // }, [currentUser]);
+ 
 
   useEffect(() => {
     (async () => {
@@ -34,7 +32,7 @@ function MenuItem() {
       const content = await response.json();
       setCurrentUser(content);
     })();
-  }, [petData.adoptionStatus]);
+  }, [petData.adoptionStatus, petData.savedStatus]);
 
   // const handleAdoption = async () => {
   //   Axios.put(
@@ -95,6 +93,7 @@ function MenuItem() {
       setPetData(data);
     });
   };
+
   const handleReturnSaved = async () => {
     Axios.put(
       `http://localhost:5000/pets/returnsaved/${petID}`,
@@ -138,6 +137,21 @@ function MenuItem() {
       });
   };
 
+  const tempObj = {};
+  listOfPets.forEach((val) => (tempObj[val._id] = val));
+
+  const pets = currentUser.savedpets
+    ? currentUser.savedpets.map((val, key) => {
+        let usersPets = tempObj[val];
+        return usersPets;
+      })
+    : [];
+
+  const currentSavedPets = pets.map((pet) => {
+    return pet._id;
+  });
+  const isPetSaved = currentSavedPets.includes(petID);
+
   return (
     <div
       style={{
@@ -166,18 +180,25 @@ function MenuItem() {
                 Adoption Status:
                 {petData.adoptionStatus}
               </p>
+
               <button onClick={handleAdoption} className="adopt">
                 Adopt Me
               </button>
-              <button onClick={handleReturn} className="foster">
+              <button onClick={handleReturn} className="return">
                 Return
               </button>
-              <button onClick={handleReturnSaved} className="foster">
-                Return Saved
-              </button>
-              <button onClick={handleSave} className="save">
-                Save for Later
-              </button>
+              {isPetSaved && (
+                <button onClick={handleReturnSaved} className="save">
+                  Return Saved
+                </button>
+              )}
+
+              {!isPetSaved && (
+                <button onClick={handleSave} className="save">
+                  Save for Later
+                </button>
+              )}
+
               <button onClick={handleFoster} className="foster">
                 Foster
               </button>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Dashboard from "./Dashboard";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
@@ -6,14 +6,19 @@ import "../styles/addpet.css";
 import Axios from "axios";
 
 function EditPet() {
-  const {
-    createPet,
-    editPetFormData,
-    setEditPetFormData,
-    uploadImage,
-    updatePet,
-  } = useContext(Context);
+  const { createPet, uploadImage, setPetData, petData, currentUser } =
+    useContext(Context);
   const { petID } = useParams();
+
+  useEffect(() => {
+    Axios.get(`http://localhost:5000/pets/getPets/${petID}`).then(
+      (response) => {
+        setPetData(response.data.element);
+      }
+    );
+  }, []);
+
+  console.log(petData);
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -33,6 +38,47 @@ function EditPet() {
   //     );
   //   }, []);
 
+  //state for editing the pets
+  const [editPetFormData, setEditPetFormData] = useState({
+    type: petData.type,
+    name: petData.name,
+    adoptionStatus: petData.adoptionStatus,
+    picture: petData.picture,
+    height: petData.height,
+    weight: petData.weight,
+    color: petData.color,
+    bio: petData.bio,
+    hypoallergenic: petData.hypoallergenic,
+    dietery: petData.dietery,
+    breed: petData.breed,
+    // adoptedBy: null,
+  });
+
+  console.log(editPetFormData);
+
+  const updatePet = () => {
+    console.log("updating pet!!!!!");
+    const data = {
+      userID: currentUser._id,
+      type: editPetFormData.type,
+      name: editPetFormData.name,
+      adoptionStatus: editPetFormData.adoptionStatus,
+      picture: editPetFormData.picture,
+      height: editPetFormData.height,
+      weight: editPetFormData.weight,
+      color: editPetFormData.color,
+      bio: editPetFormData.bio,
+      hypoallergenic: editPetFormData.hypoallergenic,
+      dietery: editPetFormData.diet,
+      breed: editPetFormData.breed,
+    };
+    fetch(`http://localhost:5000/pets/update/${petID}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  };
   return (
     <div className="addpet-content">
       <form id="addpetform">

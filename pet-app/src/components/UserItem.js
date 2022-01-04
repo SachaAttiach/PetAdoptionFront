@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 
 function UserItem() {
-  const { userData, setUserData } = useContext(Context);
+  const { userData, setUserData, listOfPets } = useContext(Context);
   const { userID } = useParams();
 
   useEffect(() => {
@@ -16,18 +16,19 @@ function UserItem() {
     );
   }, []);
 
-  //   useEffect(() => {
-  //     console.log(userData);
-  //   });
+  const tempObj = {};
+  listOfPets.forEach((val) => (tempObj[val._id] = val));
+  const pets = userData.adoptedPets
+    ? userData.adoptedPets.map((val, key) => {
+        let usersPets = tempObj[val];
+        return usersPets;
+      })
+    : [];
 
   return (
     <div className="usercard-container">
       <div className="usercardbox">
         <div className="snip1336">
-          <img className="backgroundImage"
-            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg"
-            alt="sample87"
-          />
           <figcaption>
             <img
               src="https://media-exp1.licdn.com/dms/image/C4D03AQEaklITQ1QDzw/profile-displayphoto-shrink_400_400/0/1638450044133?e=1645660800&v=beta&t=P177JHihKBXA9U5SSmqvs70WZuxQ208HDvsJFpSlbEY"
@@ -41,14 +42,10 @@ function UserItem() {
             <p>Email: {userData.email}</p>
             <p>Number: {userData.number}</p>
             <p>{userData.bio}</p>
-            <p>Adopted Pets: {userData.adoptedpets}</p>
-
-            <a href="#" className="follow">
-              Follow Me
-            </a>
-            <a href="#" className="info">
-              Save for Later
-            </a>
+            <p>Adopted Pets:</p>
+            {pets.map((pet) => {
+              return ` ${pet.name}`;
+            })}
           </figcaption>
         </div>
       </div>

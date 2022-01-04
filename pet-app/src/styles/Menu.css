@@ -131,7 +131,6 @@
   display: flex;
   flex-direction: column;
   height: 75vh;
-  border: 2px solid red;
   background-color: white;
   background-position: center;
   background-repeat: no-repeat;
@@ -139,7 +138,6 @@
 }
 .usercardbox {
   display: flex;
-  border: 2px solid green;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -173,6 +171,7 @@
   vertical-align: top;
   opacity: 0.85;
   margin-top: 0;
+  height: 60%;
 }
 
 .backgroundImage {
@@ -233,13 +232,18 @@
 
 .snip1336 .save {
   background-color: black;
+  margin-right: 4%;
 }
 
 .snip1336 .foster {
   background-color: black;
   border: 1px solid #8be4b0;
   position: relative;
-  margin-left: 2%;
+}
+.snip1336 .return {
+  background-color: black;
+  border: 1px solid purple;
+  position: relative;
 }
 
 .snip1336 h2 {
@@ -274,6 +278,7 @@
 .editPet {
   position: relative;
 }
+
 .adopt {
   padding: 5px;
   border: 1px solid #ffffff;
@@ -311,7 +316,6 @@
   display: flex;
   justify-content: center;
   justify-items: center;
-  flex-direction: column;
 }
 
 .petpage-button {

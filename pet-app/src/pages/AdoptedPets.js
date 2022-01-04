@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../Context";
+import { Link } from "react-router-dom";
 
 function AdoptedPets() {
   const { handleOpen, currentUser, listOfPets } = useContext(Context);
@@ -12,7 +13,7 @@ function AdoptedPets() {
         return usersPets;
       })
     : [];
-  console.log(pets);
+
   return (
     <div className="petpage-main">
       <h5 style={{ paddingLeft: "2%" }}>
@@ -22,9 +23,14 @@ function AdoptedPets() {
 
       {pets.map((pet) => (
         <div className="menuItem">
-          <div style={{ backgroundImage: `url(${pet.picture})` }}></div>
-          <h2> {pet.type} </h2>
-          <p>{pet.name}</p>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to={`/getPets/${pet._id}`}
+          >
+            <div style={{ backgroundImage: `url(${pet.picture})` }}></div>
+            <h2> {pet.type} </h2>
+            <p>{pet.name}</p>
+          </Link>
         </div>
       ))}
     </div>

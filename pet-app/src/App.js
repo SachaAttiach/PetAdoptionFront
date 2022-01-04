@@ -23,88 +23,57 @@ import AllPets from "./pages/AllPets";
 import AdminMenuItem from "./components/AdminMenuItem";
 
 function App() {
-  const { requireDash } = useContext(Context);
   return (
     <ContextProvider>
       <div className="App">
         <Router>
           <Navbar />
           <Switch>
-            {/* <PublicRoute exact path="/register"> */}
-            <Route exact path="/register">
-              <Register />
-            </Route>
-            {/* </PublicRoute> */}
-            {/* <PublicRoute exact path="/dashboard"> */}
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
-            {/* </PublicRoute> */}
-            {/* <PrivateRoute exact path="/admin"> */}
-            <Route exact path="/admin">
-              <Admin />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PrivateRoute exact path="/"> */}
-            <Route exact path="/">
-              <Home />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PublicRoute exact path="/landing"> */}
-            <Route exact path="/landing">
+            <PublicRoute exact path="/landing">
               <Landing />
-            </Route>
-            {/* </PublicRoute> */}
-            {/* <PrivateRoute exact path="/menu"> */}
-            <Route exact path="/menu">
+            </PublicRoute>
+            <PublicRoute exact path="/register">
+              <Register />
+            </PublicRoute>
+            <PrivateRoute exact path="/dashboard">
+              <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute exact path="/admin">
+              <Admin />
+            </PrivateRoute>
+            <PrivateRoute exact path="/">
+              <Home />
+            </PrivateRoute>
+            <PrivateRoute exact path="/menu">
               <Menu />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PrivateRoute exact path="/profiles"> */}
-            <Route exact path="/profiles">
+            </PrivateRoute>
+            <PrivateRoute exact path="/profiles">
               <Profiles />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PublicRoute exact path="/usersettings"> */}
-            <Route exact path="/usersettings">
+            </PrivateRoute>
+            <PrivateRoute exact path="/usersettings">
               <UserSettings />
-            </Route>
-            {/* </PublicRoute> */}
-            {/* <PrivateRoute exact path="/addpet"> */}
-            <Route exact path="/addpet">
+            </PrivateRoute>
+            <PrivateRoute exact path="/addpet">
               <AddPet />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PrivateRoute exact path="/getPets/:petID"> */}
-            <Route exact path="/getPets/:petID">
+            </PrivateRoute>
+            <PrivateRoute exact path="/getPets/:petID">
               <MenuItem />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PrivateRoute exact path="/getUsers/:userID"> */}
-            <Route exact path="/getUsers/:userID">
+            </PrivateRoute>
+            <PrivateRoute exact path="/getUsers/:userID">
               <UserItem />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PrivateRoute exact path="/myPets"> */}
-            <Route exact path="/myPets">
+            </PrivateRoute>
+            <PrivateRoute exact path="/myPets">
               <MyPets />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PrivateRoute exact path="/allPets"> */}
-            <Route exact path="/allPets">
+            </PrivateRoute>
+            <PrivateRoute exact path="/allPets">
               <AllPets />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PrivateRoute exact path="/allPets"> */}
-            <Route exact path="/allPets">
+            </PrivateRoute>
+            <PrivateRoute exact path="/allPets">
               <AllPets />
-            </Route>
-            {/* </PrivateRoute> */}
-            {/* <PrivateRoute exact path="/getPets/:petID"> */}
-            <Route exact path="/getPetsAdmin/:petID">
+            </PrivateRoute>
+            <PrivateRoute exact path="/getPetsAdmin/:petID">
               <AdminMenuItem />
-            </Route>
-            {/* </PrivateRoute> */}
+            </PrivateRoute>
           </Switch>
           <Footer />
         </Router>

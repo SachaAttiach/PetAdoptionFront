@@ -3,6 +3,7 @@ import { Context } from "../Context";
 import { Link } from "react-router-dom";
 import "../styles/Profile.css";
 import Dashboard from "./Dashboard";
+import Cat from "../assets/bettercat.jpeg";
 
 function Profiles() {
   const { listOfUsers } = useContext(Context);
@@ -11,10 +12,6 @@ function Profiles() {
     <div className="addpet-main-container">
       <Dashboard />
       <div className="about">
-        {/* <div
-        className="aboutTop"
-        style={{ backgroundImage: `url(${Labrador})` }}
-      ></div> */}
         <h2 className="profileHeader"> All Users </h2>
         <div className="aboutBottom">
           {listOfUsers.map((user) => {

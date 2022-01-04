@@ -39,6 +39,7 @@ export default function ContextProvider({ children }) {
       setUpdateLastName(content.lastname);
       setUpdateNumber(content.number);
       setUpdateUserBio(content.bio || "");
+      setAuthenticated(true);
     })();
   }, []);
 
@@ -66,22 +67,6 @@ export default function ContextProvider({ children }) {
     hypoallergenic: false,
     dietery: "",
     breed: "",
-  });
-
-  //state for editing the pets
-  const [editPetFormData, setEditPetFormData] = useState({
-    type: "",
-    name: "",
-    adoptionStatus: "",
-    picture: "",
-    height: "",
-    weight: "",
-    color: "",
-    bio: "",
-    hypoallergenic: true,
-    dietery: "",
-    breed: "",
-    adoptedBy: null,
   });
 
   //function to add image:
@@ -187,34 +172,13 @@ export default function ContextProvider({ children }) {
       });
     }
   };
-
-  //Updating pets:
-  const updatePet = () => {
-    console.log("updating pet!!!!!");
-    const data = {
-      type: editPetFormData.type,
-      name: editPetFormData.name,
-      adoptionStatus: editPetFormData.adoptionStatus,
-      picture: editPetFormData.picture,
-      height: editPetFormData.height,
-      weight: editPetFormData.weight,
-      color: editPetFormData.color,
-      bio: editPetFormData.bio,
-      hypoallergenic: editPetFormData.hypoallergenic,
-      dietery: editPetFormData.diet,
-      breed: editPetFormData.breed,
-    };
-    fetch("http://localhost:5000/pets/update", {
-      method: "PUT",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-  };
+  console.log(currentUser._id);
 
   //creating pets
-  const createPet = () => {
+  const createPet = (event) => {
+    event.preventDefault();
     Axios.post("http://localhost:5000/pets/createPets", {
+      userID: currentUser._id,
       type: petFormData.type,
       name: petFormData.name,
       adoptionStatus: petFormData.adoptionStatus,
@@ -230,6 +194,7 @@ export default function ContextProvider({ children }) {
       setListOfPets([
         ...listOfPets,
         {
+          userID: currentUser._id,
           type: petFormData.type,
           name: petFormData.name,
           adoptionStatus: petFormData.adoptionStatus,
@@ -246,6 +211,46 @@ export default function ContextProvider({ children }) {
     });
   };
 
+  // const createPet = async (event) => {
+  //   event.preventDefault();
+  //   fetch("http://localhost:5000/pets/createPets", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       userID: currentUser._id,
+  //       type: petFormData.type,
+  //       name: petFormData.name,
+  //       adoptionStatus: petFormData.adoptionStatus,
+  //       picture: petFormData.picture,
+  //       height: petFormData.height,
+  //       weight: petFormData.weight,
+  //       color: petFormData.color,
+  //       bio: petFormData.bio,
+  //       hypoallergenic: petFormData.hypoallergenic,
+  //       dietery: petFormData.diet,
+  //       breed: petFormData.breed,
+  //     }),
+  //     credentials: "include",
+  //   }).then((response) => {
+  //     setListOfPets([
+  //       ...listOfPets,
+  //       {
+  //         userID: currentUser._id,
+  //         type: petFormData.type,
+  //         name: petFormData.name,
+  //         adoptionStatus: petFormData.adoptionStatus,
+  //         picture: petFormData.picture,
+  //         height: petFormData.height,
+  //         weight: petFormData.weight,
+  //         color: petFormData.color,
+  //         bio: petFormData.bio,
+  //         hypoallergenic: petFormData.hypoallergenic,
+  //         dietery: petFormData.diet,
+  //         breed: petFormData.breed,
+  //       },
+  //     ]);
+  //   });
+  // };
+
   //login user
   async function loginUser(event) {
     event.preventDefault();
@@ -259,7 +264,7 @@ export default function ContextProvider({ children }) {
       }),
     });
     setRedirect(true);
-    setAuthenticated(true);
+    window.location.reload();
     handleClose();
   }
 
@@ -333,14 +338,11 @@ export default function ContextProvider({ children }) {
         updateNumber,
         setUpdateNumber,
         updateUser,
-        editPetFormData,
-        setEditPetFormData,
         listOfUsers,
         setPictureUrl,
         pictureUrl,
         uploadImage,
         updateEmail,
-        updatePet,
       }}
     >
       {children}
