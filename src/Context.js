@@ -27,11 +27,14 @@ export default function ContextProvider({ children }) {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("http://localhost:5000/api/user/users", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://pet-back-end.herokuapp.com/api/user/users",
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
       const content = await response.json();
       setCurrentUser(content);
       setUpdateEmail(content.email);
@@ -103,14 +106,16 @@ export default function ContextProvider({ children }) {
 
   // Receiving list of Users
   useEffect(() => {
-    Axios.get("http://localhost:5000/users/getUsers").then((response) => {
-      setListOfUsers(response.data);
-    });
+    Axios.get("https://pet-back-end.herokuapp.com/users/getUsers").then(
+      (response) => {
+        setListOfUsers(response.data);
+      }
+    );
   }, []);
 
   //Receiving list of Pets
   useEffect(() => {
-    Axios.get("http://localhost:5000/pets/getPets", {
+    Axios.get("https://pet-back-end.herokuapp.com/pets/getPets", {
       userID: currentUser._id,
     }).then((response) => {
       setListOfPets(response.data);
@@ -119,7 +124,7 @@ export default function ContextProvider({ children }) {
 
   // creating user
   const createUser = () => {
-    Axios.post("http://localhost:5000/api/user/register", {
+    Axios.post("https://pet-back-end.herokuapp.com/api/user/register", {
       firstname: registerFirstName,
       lastname: registerLastName,
       email: registerEmail,
@@ -163,7 +168,7 @@ export default function ContextProvider({ children }) {
       if (updatePassword) {
         data.password = updatePassword;
       }
-      fetch("http://localhost:5000/users/update", {
+      fetch("https://pet-back-end.herokuapp.com/users/update", {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -175,7 +180,7 @@ export default function ContextProvider({ children }) {
   //creating pets
   const createPet = (event) => {
     event.preventDefault();
-    Axios.post("http://localhost:5000/pets/createPets", {
+    Axios.post("https://pet-back-end.herokuapp.com/pets/createPets", {
       userID: currentUser._id,
       type: petFormData.type,
       name: petFormData.name,
@@ -212,7 +217,7 @@ export default function ContextProvider({ children }) {
   //login user
   async function loginUser(event) {
     event.preventDefault();
-    await fetch("http://localhost:5000/api/user/login", {
+    await fetch("https://pet-back-end.herokuapp.com/api/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -228,7 +233,7 @@ export default function ContextProvider({ children }) {
 
   //logout user:
   const logout = async () => {
-    await fetch("http://localhost:5000/api/user/logout", {
+    await fetch("https://pet-back-end.herokuapp.com/api/user/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

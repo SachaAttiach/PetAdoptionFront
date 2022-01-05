@@ -11,7 +11,7 @@ function AdminMenuItem() {
   const { petID } = useParams();
 
   useEffect(() => {
-    Axios.get(`http://localhost:5000/pets/getPets/${petID}`).then(
+    Axios.get(`https://pet-back-end.herokuapp.com/pets/getPets/${petID}`).then(
       (response) => {
         setPetData(response.data.element);
       }

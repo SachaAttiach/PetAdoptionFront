@@ -11,11 +11,11 @@ function UserItem() {
   const { userID } = useParams();
 
   useEffect(() => {
-    Axios.get(`http://localhost:5000/users/getUsers/${userID}`).then(
-      (response) => {
-        setUserData(response.data.elem);
-      }
-    );
+    Axios.get(
+      `https://pet-back-end.herokuapp.com/users/getUsers/${userID}`
+    ).then((response) => {
+      setUserData(response.data.elem);
+    });
   }, []);
 
   const tempObj = {};

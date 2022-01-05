@@ -9,7 +9,7 @@ function EditPet() {
   const { petID } = useParams();
 
   useEffect(() => {
-    Axios.get(`http://localhost:5000/pets/getPets/${petID}`).then(
+    Axios.get(`https://pet-back-end.herokuapp.com/pets/getPets/${petID}`).then(
       (response) => {
         setPetData(response.data.element);
       }
@@ -62,7 +62,7 @@ function EditPet() {
       dietery: editPetFormData.diet,
       breed: editPetFormData.breed,
     };
-    fetch(`http://localhost:5000/pets/update/${petID}`, {
+    fetch(`https://pet-back-end.herokuapp.com/pets/update/${petID}`, {
       method: "PUT",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

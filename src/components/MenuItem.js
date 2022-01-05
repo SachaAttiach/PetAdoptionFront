@@ -11,7 +11,7 @@ function MenuItem() {
   const { petID } = useParams();
 
   useEffect(() => {
-    Axios.get(`http://localhost:5000/pets/getPets/${petID}`).then(
+    Axios.get(`https://pet-back-end.herokuapp.com/pets/getPets/${petID}`).then(
       (response) => {
         console.log("its refreshing");
         setPetData(response.data.element);
@@ -21,18 +21,21 @@ function MenuItem() {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("http://localhost:5000/api/user/users", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://pet-back-end.herokuapp.com/api/user/users",
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
       const content = await response.json();
       setCurrentUser(content);
     })();
   }, [petData.adoptionStatus, petData.savedStatus]);
 
   const handleAdoption = () => {
-    fetch(`http://localhost:5000/pets/adopt/${petID}`, {
+    fetch(`https://pet-back-end.herokuapp.com/pets/adopt/${petID}`, {
       method: "PUT",
       body: JSON.stringify({
         userID: currentUser._id,
@@ -54,7 +57,7 @@ function MenuItem() {
 
   const handleSave = async () => {
     Axios.put(
-      `http://localhost:5000/pets/save/${petID}`,
+      `https://pet-back-end.herokuapp.com/pets/save/${petID}`,
       {
         savedStatus: "save",
         userID: currentUser._id,
@@ -68,7 +71,7 @@ function MenuItem() {
 
   const handleReturnSaved = async () => {
     Axios.put(
-      `http://localhost:5000/pets/returnsaved/${petID}`,
+      `https://pet-back-end.herokuapp.com/pets/returnsaved/${petID}`,
       {
         userID: currentUser._id,
       },
@@ -80,7 +83,7 @@ function MenuItem() {
   };
 
   const handleFoster = async () => {
-    fetch(`http://localhost:5000/pets/foster/${petID}`, {
+    fetch(`https://pet-back-end.herokuapp.com/pets/foster/${petID}`, {
       method: "PUT",
       body: JSON.stringify({
         userID: currentUser._id,
@@ -100,7 +103,7 @@ function MenuItem() {
 
   console.log(petData);
   const handleReturn = async () => {
-    fetch(`http://localhost:5000/pets/return/${petID}`, {
+    fetch(`https://pet-back-end.herokuapp.com/pets/return/${petID}`, {
       method: "PUT",
       body: JSON.stringify({ userID: currentUser._id }),
       credentials: "include",
