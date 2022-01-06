@@ -227,7 +227,7 @@ export default function ContextProvider({ children }) {
       }),
     });
     setRedirect(true);
-    window.location.reload();
+
     handleClose();
   }
 
