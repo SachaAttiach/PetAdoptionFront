@@ -106,7 +106,7 @@ export default function ContextProvider({ children }) {
 
   // Receiving list of Users
   useEffect(() => {
-    Axios.get("https://pet-back-end.herokuapp.com/users/getUsers").then(
+    Axios.get("https://pet-back-end.herokuapp.com/getUsers").then(
       (response) => {
         setListOfUsers(response.data);
       }

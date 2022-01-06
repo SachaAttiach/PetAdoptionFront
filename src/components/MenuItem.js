@@ -101,7 +101,6 @@ function MenuItem() {
       });
   };
 
-  console.log(petData);
   const handleReturn = async () => {
     fetch(`https://pet-back-end.herokuapp.com/pets/return/${petID}`, {
       method: "PUT",
@@ -132,6 +131,8 @@ function MenuItem() {
     return pet._id;
   });
   const isPetSaved = currentSavedPets.includes(petID);
+
+  //usememo to improve. 
 
   return (
     <div
